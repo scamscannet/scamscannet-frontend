@@ -1,6 +1,15 @@
 <script>
     import { page } from '$app/stores';
-    import {Accordion, AccordionItem, Breadcrumb, BreadcrumbItem, Card, Spinner} from "flowbite-svelte";
+    import {
+        Accordion,
+        AccordionItem,
+        Breadcrumb,
+        BreadcrumbItem,
+        Button,
+        Card,
+        Popover,
+        Spinner
+    } from "flowbite-svelte";
     import prettify from 'html-prettify';
 
     let loading = true;
@@ -17,6 +26,9 @@
         console.log(error);
     });
 
+    function truncate(str, n){
+        return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+    };
 </script>
 <Breadcrumb aria-label="Default breadcrumb example" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
@@ -71,6 +83,54 @@
                                     {prettify(requested_page.data.code.html)}
                                 </code>
                             </pre>
+
+                        </div>
+                    </AccordionItem>
+                </Accordion>
+            </div>
+
+            <div class="text-center">
+                <p class="text-xl font-semibold">Links</p>
+            </div>
+            <div class="col-span-3 text-center overflow-hidden">
+                <Accordion>
+                    <AccordionItem>
+                        <span class="text-gray-800" slot="header">External Links</span>
+                        <div class="mb-2 text-gray-800 dark:text-gray-400">
+                            <ul class="list-disc">
+                                {#each requested_page.data.links.external as link, i}
+                                    <li class:bg-gray-200={i % 2 !== 0} class="rounded overflow-hidden">
+                                        <div>
+                                            <div id="link-ext-{i}" class="py-2">{truncate(link, 45)}</div>
+                                            <Popover class="w-96 text-sm font-light " title="Full Link" triggeredBy="#link-ext-{i}">
+                                                {link}
+                                            </Popover>
+
+                                        </div>
+
+                                    </li>
+                                {/each}
+                            </ul>
+
+                        </div>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <span class="text-gray-800" slot="header">Internal Links</span>
+                        <div class="mb-2 text-gray-800 dark:text-gray-400">
+                            <ul class="list-none">
+                                {#each requested_page.data.links.internal as link, i}
+                                    <li class:bg-gray-200={i % 2 !== 0} class="rounded overflow-hidden">
+                                        <div>
+                                            <div id="link-int-{i}" class="py-2">{truncate(link, 45)}</div>
+                                            <Popover class="w-96 text-sm font-light " title="Full Link" triggeredBy="#link-int-{i}">
+                                                {requested_page.data.url + link}
+                                            </Popover>
+
+                                        </div>
+
+                                    </li>
+                                {/each}
+                            </ul>
 
                         </div>
                     </AccordionItem>
