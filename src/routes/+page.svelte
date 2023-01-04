@@ -71,6 +71,12 @@ import {Card} from "flowbite-svelte";
             Lookup domain and ip data through the whois protocol.
         </p>
     </Card>
+    <Card href="/tools/registry">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Registry</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
+            The registry contains all data we aggregated about specific websites.
+        </p>
+    </Card>
     <Card href="/tools/blacklist">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Blacklist</h5>
         <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
