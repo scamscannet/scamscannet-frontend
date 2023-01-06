@@ -17,7 +17,7 @@
         data: {},
         available: 1 // 0 => No Report, 1 => Available, 2=> Website offline
     }
-    fetch("https://registry.scamscan.net/data/get?domain=" + $page.params.domain)
+    fetch("https://registry.scamscan.net/data/get?url=" + $page.params.domain)
         .then(response => response.json())
         .then(data => {
             requested_page.data = data;
@@ -38,7 +38,7 @@
 </Breadcrumb>
 
 <div class="w-full flex justify-center rounded overflow-hidden mt-4 ">
-    <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?domain=" + $page.params.domain}>
+    <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>
 </div>
 {#if loading}
     <div class="w-full flex justify-center mt-8">

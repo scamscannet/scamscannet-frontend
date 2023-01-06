@@ -31,6 +31,6 @@
         <NavLi href="/contact">Contact</NavLi>
     </NavUl>
 </Navbar>
-<div class="container mx-auto">
+<div class="container mx-auto mb-12">
     <slot />
 </div>
