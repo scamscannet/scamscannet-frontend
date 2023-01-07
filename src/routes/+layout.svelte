@@ -29,37 +29,39 @@
 </svelte:head>
 
 <div class="flex flex-col justify-between w-full min-h-screen">
-    <Navbar let:hidden let:toggle>
-        <NavBrand href="/">
-            <img
-                    src="https://assets.interbloc.org/images/logo/Interbloc/logo_blue.png"
-                    class="mr-3 h-6 sm:h-9"
-                    alt="Flowbite Logo"
-            />
-            <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+    <div>
+        <Navbar let:hidden let:toggle>
+            <NavBrand href="/">
+                <img
+                        src="https://assets.interbloc.org/images/logo/Interbloc/logo_blue.png"
+                        class="mr-3 h-6 sm:h-9"
+                        alt="Flowbite Logo"
+                />
+                <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
       ScamScan
     </span>
-        </NavBrand>
-        <div class="flex md:order-2">
-            {#if (authenticated)}
-                <Button on:click={logout} size="sm">Logout</Button>
-            {:else }
-                <Button on:click={() => {window.location = "/authentication/login"} } size="sm">Login</Button>
-            {/if}
-            <NavHamburger on:click={toggle}/>
+            </NavBrand>
+            <div class="flex md:order-2">
+                {#if (authenticated)}
+                    <Button on:click={logout} size="sm">Logout</Button>
+                {:else }
+                    <Button on:click={() => {window.location = "/authentication/login"} } size="sm">Login</Button>
+                {/if}
+                <NavHamburger on:click={toggle}/>
+            </div>
+            <NavUl {hidden}>
+                <NavLi href="/" active={true}>Home</NavLi>
+                <NavLi href="/about">About</NavLi>
+                <NavLi href="/services">Services</NavLi>
+                <NavLi href="/pricing">Pricing</NavLi>
+                <NavLi href="/contact">Contact</NavLi>
+            </NavUl>
+        </Navbar>
+
+
+        <div class="mb-auto container mx-auto mb-12">
+            <slot />
         </div>
-        <NavUl {hidden}>
-            <NavLi href="/" active={true}>Home</NavLi>
-            <NavLi href="/about">About</NavLi>
-            <NavLi href="/services">Services</NavLi>
-            <NavLi href="/pricing">Pricing</NavLi>
-            <NavLi href="/contact">Contact</NavLi>
-        </NavUl>
-    </Navbar>
-
-
-    <div class="mb-auto container mx-auto mb-12">
-        <slot />
 
     </div>
 
