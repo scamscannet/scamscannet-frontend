@@ -1,7 +1,7 @@
 <script>
 
-import LoginComponent from "../../../components/auth/LoginComponent.svelte";
 import {Card} from "flowbite-svelte";
+import LoginComponent from "../_components/auth/LoginComponent.svelte";
 </script>
 
 <svelte:head>

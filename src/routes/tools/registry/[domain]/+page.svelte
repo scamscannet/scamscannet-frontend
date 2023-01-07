@@ -11,6 +11,8 @@
         Spinner
     } from "flowbite-svelte";
     import prettify from 'html-prettify';
+    import UserView from "../../../_components/UserView.svelte";
+    import RequestNewScrape from "./_components/RequestNewScrape.svelte";
 
     let loading = true;
     let requested_page = {
@@ -40,6 +42,11 @@
 <div class="w-full flex justify-center rounded overflow-hidden mt-4 ">
     <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>
 </div>
+<UserView>
+    <div class="w-full flex justify-center pt-6 pb-2" slot="content">
+        <RequestNewScrape domain={$page.params.domain} ></RequestNewScrape>
+    </div>
+</UserView>
 {#if loading}
     <div class="w-full flex justify-center mt-8">
         <Spinner></Spinner>

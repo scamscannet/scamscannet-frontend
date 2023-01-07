@@ -1,6 +1,7 @@
 <script>
 import {Card} from "flowbite-svelte";
-import LoginComponent from "../components/auth/LoginComponent.svelte";
+import LoginComponent from "./authentication/_components/auth/LoginComponent.svelte";
+import UserView from "./_components/UserView.svelte";
 </script>
 
 <div style="height: 560px" class="relative w-full h-96">
@@ -85,3 +86,4 @@ import LoginComponent from "../components/auth/LoginComponent.svelte";
         </p>
     </Card>
 </div>
+<UserView></UserView>

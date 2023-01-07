@@ -1,19 +1,15 @@
 import {checkForError} from "../errors";
+import type {RequestType} from "./requestType";
 
-export const GET = (url: string, path: string, params = {}): object => {
-    fetch(
-        url + "/" + path + new URLSearchParams(params),
-        {
+
+export const GET: RequestType = {
+    execute: getRequest
+}
+async function getRequest  ({url = "", payload = {} }): Promise<object> {
+    let response = await fetch(url, {
             method: "GET",
         }
     )
-        .then(response => checkForError(response))
-        .then(response => response.json())
-        .then(data => {
-            return data
-        })
-        .catch((error) => {
-            throw new Error(error)
-        })
-    return {}
+    checkForError(response)
+    return response.json()
 }

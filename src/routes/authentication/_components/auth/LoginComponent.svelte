@@ -1,6 +1,6 @@
 <script>
-    import { authenticate, getUserDetails, isUserLoggedIn, logout } from "../../hook/auth.ts";
-    import { userStore} from "../../store/user";
+    import { authenticate, isUserLoggedIn, logout } from "../../../../hook/auth.ts";
+    import { userStore} from "../../../../store/user.ts";
     import {Button, Input, Label} from "flowbite-svelte";
 
     let username = null;
@@ -10,7 +10,6 @@
     let authenticated = isUserLoggedIn();
     userStore.subscribe(value => authenticated = isUserLoggedIn())
     async function login(){
-        const user = await getUserDetails(username, password);
         authenticate(username, password);
     }
 </script>
@@ -33,7 +32,7 @@
     </form>
 {:else}
     <div class="my-3 w-full border border-green-700 text-green-700 py-3 px-2 rounded-lg shadow ">
-        User already logged in
+        You are logged in!
     </div>
     <Button class="mt-2" on:click={logout}>Logout</Button>
 {/if}
