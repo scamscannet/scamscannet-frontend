@@ -52,9 +52,12 @@
             <div class="text-center">
                 <p class="text-xl font-semibold">Title</p>
             </div>
-            <div class="col-span-3 text-center">
-                {requested_page.data.code.title}
+            <div class="pl-6 py-5 col-span-3 rounded-t-xl border w-full text-gray-700 dark:text-gray-400 hover:bg-gray-100">
+                <p class=" font-medium">
+                    {requested_page.data.code.title}
+                </p>
             </div>
+
 
             <div class="text-center">
                 <p class="text-xl font-semibold">Text</p>
