@@ -58,7 +58,7 @@
     </Navbar>
 
 
-    <div class="mb-auto container mx-auto mb-12 h-full">
+    <div class="mb-auto container mx-auto mb-12">
         <slot />
 
     </div>
