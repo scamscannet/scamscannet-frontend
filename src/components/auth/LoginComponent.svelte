@@ -1,0 +1,39 @@
+<script>
+    import { authenticate, getUserDetails, isUserLoggedIn, logout } from "../../hook/auth.ts";
+    import { userStore} from "../../store/user";
+    import {Button, Input, Label} from "flowbite-svelte";
+
+    let username = null;
+    let password = null;
+    let error = null;
+
+    let authenticated = isUserLoggedIn();
+    userStore.subscribe(value => authenticated = isUserLoggedIn())
+    async function login(){
+        const user = await getUserDetails(username, password);
+        authenticate(username, password);
+    }
+</script>
+{#if !authenticated}
+    {#if error}
+        <div class="my-3 w-full border border-red-700 text-red-700 py-3 px-2 rounded-lg shadow ">
+            {error}
+        </div>
+    {/if}
+    <form on:submit|preventDefault={login} class="">
+        <div class='mb-6'>
+            <Label for='large-input' class='block mb-2'>Username</Label>
+            <Input bind:value={username} id="large-input" placeholder="Username" />
+        </div>
+        <div class='mb-6'>
+            <Label for='large-input' class='block mb-2'>Password</Label>
+            <Input bind:value={password} id="large-input" placeholder="Password" />
+        </div>
+        <Button type="submit">Login</Button>
+    </form>
+{:else}
+    <div class="my-3 w-full border border-green-700 text-green-700 py-3 px-2 rounded-lg shadow ">
+        User already logged in
+    </div>
+    <Button class="mt-2" on:click={logout}>Logout</Button>
+{/if}

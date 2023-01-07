@@ -1,5 +1,6 @@
 <script>
 import {Card} from "flowbite-svelte";
+import LoginComponent from "../components/auth/LoginComponent.svelte";
 </script>
 
 <div style="height: 560px" class="relative w-full h-96">
