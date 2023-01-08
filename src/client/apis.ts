@@ -18,7 +18,10 @@ export const PATHS = {
     registry: {
         get: "/get",
         screenshot: "/get-image",
-        createScrapeJob: "/dispatcher/create-job"
+        createScrapeJob: "/dispatcher/create-job",
+        dispatcher: {
+            websocket: "/dispatcher/websocket"
+        }
     },
     whois: {
         whois: "/whois"

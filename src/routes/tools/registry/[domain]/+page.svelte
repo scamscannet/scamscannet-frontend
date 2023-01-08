@@ -15,6 +15,8 @@
     import RequestNewScrape from "./_components/RequestNewScrape.svelte";
     import {onMount} from "svelte";
     import {browser} from "$app/environment";
+    import LoadingView from "../../../_components/LoadingView.svelte";
+    import CardView from "../../../_components/CardView.svelte";
 
     let loading = true;
     let requested_page = {
@@ -27,9 +29,21 @@
         .then(response => response.json())
         .then(data => {
             requested_page.data = data;
-            requested_page.data.code.html = pretty(requested_page.data.code.html)
-            loading = false;
+            if(data.detail === "There is no existing data for this url."){
+                requested_page.available = 0
+                loading = false;
+
+            } else if(data.offline) {
+                requested_page.available = 2
+                loading = false;
+
+            } else {
+                requested_page.data.code.html = pretty(requested_page.data.code.html)
+                loading = false;
+
+            }
         }).catch(error => {
+            requested_page.available = 0;
         console.log(error);
     });
 
@@ -45,20 +59,20 @@
     <BreadcrumbItem>{$page.params.domain.toUpperCase()}</BreadcrumbItem>
 </Breadcrumb>
 
-<div class="w-full flex justify-center rounded overflow-hidden mt-4 ">
-    <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>
-</div>
-<UserView>
-    <div class="w-full flex justify-center pt-6 pb-2" slot="content">
-        <RequestNewScrape domain={$page.params.domain} ></RequestNewScrape>
-    </div>
-</UserView>
-{#if loading}
-    <div class="w-full flex justify-center mt-8">
-        <Spinner></Spinner>
 
+{#if loading}
+    <LoadingView>
+
+    </LoadingView>
+{:else if requested_page.available === 1}
+    <div class="w-full flex justify-center rounded overflow-hidden mt-4 ">
+        <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>
     </div>
-{:else }
+    <UserView>
+        <div class="w-full flex justify-center pt-6 pb-2" slot="content">
+            <RequestNewScrape domain={$page.params.domain} ></RequestNewScrape>
+        </div>
+    </UserView>
     <div class="p-2 flex flex-col rounded border mt-4">
         <h1 class="w-full text-center text-4xl font-bold">{$page.params.domain.toUpperCase()}</h1>
         <div class="grid grid-cols-4 mt-4 gap-y-4">
@@ -153,4 +167,34 @@
             </div>
         </div>
     </div>
+{:else if (requested_page.available === 0)}
+    <UserView>
+        <CardView slot="content">
+            <div class="">
+                <p>The requested page has not yet been scraped. You can request a new scrape by pressing the button below.</p>
+                <div class="flex justify-center w-full mt-3">
+                    <RequestNewScrape class="" domain={$page.params.domain} ></RequestNewScrape>
+                </div>
+            </div>
+        </CardView>
+        <div slot="errorNotice">
+            <p>The requested page has not yet been scraped. Only authenticated users can request to scrape a page.</p>
+        </div>
+    </UserView>
+{:else if (requested_page.available === 2)}
+    <UserView>
+        <CardView slot="content">
+            <div class="">
+                <p>The requested page was offline during the last scrape attempt. You can request a new try by pressing the button below.</p>
+                <div class="flex justify-center w-full mt-3">
+                    <RequestNewScrape class="" domain={$page.params.domain} ></RequestNewScrape>
+                </div>
+            </div>
+        </CardView>
+        <div slot="errorNotice">
+            <p>The requested page was offline during the last scrape attempt. Please sign in if you believe it is online to submit a new scrape request. </p>
+        </div>
+    </UserView>
+
+
 {/if}
