@@ -6,7 +6,7 @@ import UserView from "./_components/UserView.svelte";
 
 <div style="height: 560px" class="relative w-full h-96">
     <div class="h-full rounded overflow-hidden absolute w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" class="min-w-full" preserveAspectRatio="none" viewBox="0 0 1440 560">
+        <svg xmlns="http://www.w3.org/2000/svg" class="min-h-full lg:h-auto lg:min-w-full" preserveAspectRatio="none" viewBox="0 0 1440 560">
             <g mask="url(&quot;#SvgjsMask1021&quot;)" fill="none">
                 <rect width="1440" height="560" x="0" y="0" fill="#0e2a47"></rect>
                 <path d="M107 308L106 692" stroke-width="6" stroke="url(#SvgjsLinearGradient1022)" stroke-linecap="round" class="Up"></path>
@@ -67,7 +67,7 @@ import UserView from "./_components/UserView.svelte";
 </div>
 <h2 class="text-3xl font-bold mt-8 mb-2">Tools</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    <Card href="/whois">
+    <Card href="/tools/whois">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Domain Whois</h5>
         <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
             Lookup domain and ip data through the whois protocol.
@@ -86,4 +86,3 @@ import UserView from "./_components/UserView.svelte";
         </p>
     </Card>
 </div>
-<UserView></UserView>

@@ -1,5 +1,6 @@
 <script>
     import {Input, Button, Spinner, Progressbar, Breadcrumb, BreadcrumbItem} from "flowbite-svelte";
+    import DomainInputForm from "../_components/DomainInputForm.svelte";
 
     let loading = {
         blacklistCheck: false
@@ -15,9 +16,4 @@
 <h1 class="text-3xl font-bold mt-4 mb-2">ScamScan Blacklist Check</h1>
 
 
-<div class='my-6'>
-    <Input bind:value={inputDomain} placeholder="domain.tld" />
-    <Button on:click={() => window.location = `/tools/blacklist/${inputDomain}`} class="mt-2">
-        Check Domain
-    </Button>
-</div>
+<DomainInputForm redirectURL="/tools/blacklist/" ></DomainInputForm>

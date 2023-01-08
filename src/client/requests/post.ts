@@ -17,7 +17,6 @@ async function postRequest({
        contentType: "application/json"
    }
 }): Promise<object> {
-    console.log(payload.body)
     let response = await fetch(url, {
             method: "POST",
             headers: {
@@ -26,6 +25,7 @@ async function postRequest({
             body: payload.body
         }
     )
-    checkForError(response)
-    return response.json()
+
+
+    return await checkForError(response)
 }

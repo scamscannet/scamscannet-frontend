@@ -10,6 +10,6 @@ async function getRequest  ({url = "", payload = {} }): Promise<object> {
             method: "GET",
         }
     )
-    checkForError(response)
-    return response.json()
+
+    return await checkForError(response)
 }

@@ -10,19 +10,24 @@
         Popover,
         Spinner
     } from "flowbite-svelte";
-    import prettify from 'html-prettify';
+    import pretty from  'pretty'
     import UserView from "../../../_components/UserView.svelte";
     import RequestNewScrape from "./_components/RequestNewScrape.svelte";
+    import {onMount} from "svelte";
+    import {browser} from "$app/environment";
 
     let loading = true;
     let requested_page = {
         data: {},
         available: 1 // 0 => No Report, 1 => Available, 2=> Website offline
     }
+
+
     fetch("https://registry.scamscan.net/data/get?url=" + $page.params.domain)
         .then(response => response.json())
         .then(data => {
             requested_page.data = data;
+            requested_page.data.code.html = pretty(requested_page.data.code.html)
             loading = false;
         }).catch(error => {
         console.log(error);
@@ -30,7 +35,8 @@
 
     function truncate(str, n){
         return (str.length > n) ? str.slice(0, n-1) + '...' : str;
-    };
+    }
+
 </script>
 <Breadcrumb aria-label="Default breadcrumb example" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
@@ -87,13 +93,12 @@
                 <Accordion>
                     <AccordionItem>
                         <span class="text-gray-800" slot="header">Press here to view raw page source code</span>
-                        <div class="mb-2 text-gray-800 dark:text-gray-400">
+                        <div class="mb-2 text-gray-800 dark:text-gray-400 text-left">
                             <pre>
-                                <code>
-                                    {prettify(requested_page.data.code.html)}
-                                </code>
+                                <p>
+                                    {requested_page.data.code.html}
+                                </p>
                             </pre>
-
                         </div>
                     </AccordionItem>
                 </Accordion>

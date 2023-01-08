@@ -2,9 +2,22 @@ import {userStore} from "../store/user";
 import {get} from "svelte/store";
 import {CLIENTS, makeApiRequest} from "../client/request";
 import {PATHS, APIS} from "../client/apis";
+import type {HTTPError} from "../client/errors";
+import jwt_decode from 'jwt-decode';
 
 export const isUserLoggedIn = () => {
-    return (get(userStore) !== null);
+    const storeContent = get(userStore);
+    if(storeContent === null){
+        return false;
+    }
+    try {
+        const content = jwt_decode(storeContent);
+        // TODO: check for expiry
+        return true
+    } catch (e) {
+        logout()
+        return false
+    }
 }
 
 export const authenticate = async (username: string, password: string) => {
@@ -19,12 +32,16 @@ export const authenticate = async (username: string, password: string) => {
             body: body_string
         }
     )
-    .then(response => userStore.set(response.access_token))
-    .catch(error => alert("Invalid Username or Password"))
-
+    .then(response => {
+        if (response.error){
+            alert(response.content.detail)
+        } else {
+            userStore.set(response.content.access_token)
+        }
+    })
+    .catch(error => console.log(error))
 }
 
 export const logout = () => {
     userStore.set(null);
-    console.log(userStore)
 }
