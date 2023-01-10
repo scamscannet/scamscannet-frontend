@@ -34,7 +34,7 @@
     {/if}
 </div>
 {#if suggestions.length > 0}
-    <div class='w-full pr-56 mt-2 text-gray-500'>
+    <div class='w-full lg:pr-56 mt-2 text-gray-500'>
         <div class="flex flex-col rounded-lg border overflow-hidden">
             {#each suggestions as suggestion, id}
                 <a href="#" class="py-2 px-2 hover:bg-blue-500 hover:text-gray-50" class:bg-gray-200={id % 2}>{suggestion.full_domain}</a>
