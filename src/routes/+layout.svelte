@@ -59,14 +59,14 @@
         </Navbar>
 
 
-        <div class="mb-auto container mx-auto mb-12">
+        <div class="mb-auto container px-1 md:px-0 mx-auto mb-12">
             <slot />
         </div>
 
     </div>
 
     <!-- Footer -->
-    <div class="container mx-auto">
+    <div class="container mx-auto ">
         <Footer>
             <FooterCopyright href="/" by="ScamScan™" year={2023} />
             <FooterLinkGroup ulClass="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">

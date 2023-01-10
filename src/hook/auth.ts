@@ -1,8 +1,8 @@
 import {userStore} from "../store/user";
 import {get} from "svelte/store";
-import {CLIENTS, makeApiRequest} from "../client/request";
-import {PATHS, APIS} from "../client/apis";
-import type {HTTPError} from "../client/errors";
+import {CLIENTS, makeApiRequest} from "../lib/client/request";
+import {PATHS, APIS} from "../lib/client/apis";
+import type {HTTPError} from "../lib/client/errors";
 import jwt_decode from 'jwt-decode';
 
 export const isUserLoggedIn = () => {

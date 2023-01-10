@@ -1,7 +1,11 @@
 <script>
-import {Card} from "flowbite-svelte";
-import LoginComponent from "./authentication/_components/auth/LoginComponent.svelte";
-import UserView from "./_components/UserView.svelte";
+    import {Button, Card, Input, Label} from "flowbite-svelte";
+    import LoginComponent from "./authentication/_components/auth/LoginComponent.svelte";
+    import UserView from "./_components/UserView.svelte";
+    import CardView from "./_components/CardView.svelte";
+    import DomainWithSuggestionInput from "./_components/DomainWithSuggestionInput.svelte";
+
+    let domainInput;
 </script>
 
 <div style="height: 560px" class="relative w-full h-96">
@@ -65,6 +69,11 @@ import UserView from "./_components/UserView.svelte";
         <h1 class="font-bold text-4xl">ScamScan <br> Make the internet a safer place</h1>
     </div>
 </div>
+<h2 class="text-3xl font-bold mt-8 mb-2">Thread Assessment</h2>
+<div class="w-full flex flex-col items-center">
+    <DomainWithSuggestionInput></DomainWithSuggestionInput>
+</div>
+
 <h2 class="text-3xl font-bold mt-8 mb-2">Tools</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     <Card href="/tools/whois">
@@ -76,7 +85,7 @@ import UserView from "./_components/UserView.svelte";
     <Card href="/tools/registry">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Registry</h5>
         <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
-            The registry contains all data we aggregated about specific websites.
+            The registry contains all data we scraped about websites.
         </p>
     </Card>
     <Card href="/tools/blacklist">

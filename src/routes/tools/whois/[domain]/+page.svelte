@@ -1,7 +1,7 @@
 <script>
     import {onMount} from "svelte";
-    import {CLIENTS, makeApiRequest} from "../../../../client/request";
-    import {APIS, PATHS} from "../../../../client/apis";
+    import {CLIENTS, makeApiRequest} from "../../../../lib/client/request";
+    import {APIS, PATHS} from "../../../../lib/client/apis";
     import {page} from "$app/stores";
     import LoadingView from "../../../_components/LoadingView.svelte";
     import {Accordion, AccordionItem, Breadcrumb, BreadcrumbItem, Modal} from "flowbite-svelte";
@@ -31,7 +31,6 @@
 <h1 class="text-3xl font-bold mt-4 mb-2">Whois Lookup</h1>
 
 {#if (!result)}
-
     <LoadingView></LoadingView>
 {:else}
     <Accordion>
