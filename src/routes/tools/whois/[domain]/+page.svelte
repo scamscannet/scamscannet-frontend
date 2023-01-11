@@ -18,16 +18,17 @@
     let result = null;
 
     onMount(() => {
-        makeApiRequest(
-            CLIENTS.GET,
-            APIS.whois,
-            PATHS.whois.whois + "/" + $page.params.domain,
-            {},
-            {}
-        ).then(response => {
-            result = response.content;
-        })
-
+        if($page.params.domain){
+            makeApiRequest(
+                CLIENTS.GET,
+                APIS.whois,
+                PATHS.whois.whois + "/" + $page.params.domain,
+                {},
+                {}
+            ).then(response => {
+                result = response.content;
+            })
+        }
     })
 
     function capitalize(string){
