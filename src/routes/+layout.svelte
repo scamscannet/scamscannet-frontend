@@ -23,6 +23,7 @@
 <svelte:head>
     <title>ScamScan</title>
 
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta name="twitter:title" content="ScamScan | Find - Fight - Prevent online fraud" />
     <meta name="twitter:description" content="ScamScan makes the internet safer with innovative scam detection techniques." />
     <meta name="description" content="ScamScan makes the internet safer with innovative scam detection techniques. We detect, monitor and fight fraud to make the world wide web a safer place." />

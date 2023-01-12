@@ -14,20 +14,41 @@
         TableBodyCell,
         TableBodyRow, TableHead, TableHeadCell
     } from "flowbite-svelte";
+    import {validateIpAddress} from "$lib/checks";
+    import MapBox from "../../../_components/MapBox.svelte";
 
     let result = null;
-
+    let checkForIpAddress = false;
+    let domain = "";
     onMount(() => {
-        if($page.params.domain){
-            makeApiRequest(
-                CLIENTS.GET,
-                APIS.whois,
-                PATHS.whois.whois + "/" + $page.params.domain,
-                {},
-                {}
-            ).then(response => {
-                result = response.content;
-            })
+        domain = $page.params.domain;
+        if(domain){
+
+            checkForIpAddress = validateIpAddress(domain)
+            if(checkForIpAddress){
+                makeApiRequest(
+                    CLIENTS.GET,
+                    APIS.whois,
+                    PATHS.whois.ipWhois + "/" + domain,
+                    {},
+                    {}
+                ).then(response => {
+                    result = response.content;
+                    console.log(result.parsed);
+                })
+
+            } else {
+                makeApiRequest(
+                    CLIENTS.GET,
+                    APIS.whois,
+                    PATHS.whois.whois + "/" + domain,
+                    {},
+                    {}
+                ).then(response => {
+                    result = response.content;
+                })
+
+            }
         }
     })
 
@@ -39,14 +60,14 @@
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>
     <BreadcrumbItem href="/tools/whois">Whois</BreadcrumbItem>
-    <BreadcrumbItem href="/tools/whois/{$page.params.domain}">{$page.params.domain.toUpperCase()}</BreadcrumbItem>
+    <BreadcrumbItem href="/tools/whois/{domain}">{domain.toUpperCase()}</BreadcrumbItem>
 </Breadcrumb>
 <h1 class="text-3xl font-bold mt-4 mb-2">Whois Lookup</h1>
 
 {#if (!result)}
     <LoadingView></LoadingView>
 {:else}
-    {#if result.parsed.registrar.name}
+    {#if !checkForIpAddress && result.parsed.registrar.name}
         <div class="grid grid-cols-4 mb-4 gap-4">
             <Card>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Registrar</h5>
@@ -74,7 +95,7 @@
             </Card>
         </div>
         {#each result.parsed.contact as contact}
-        <div class="border overflow-hidden rounded-lg mb-4">
+            <div class="border overflow-hidden rounded-lg mb-4">
                 <Table striped={true}>
                     <TableHead>
                         <TableHeadCell>{contact.type}</TableHeadCell>
@@ -93,10 +114,19 @@
                 </Table>
             </div>
         {/each}
+    {:else }
+        {#if result.parsed.addresses.length > 1}
+            <div class="w-full my-2">
+                <MapBox latitude={result.parsed.addresses[0].latitude}
+                        longitude={result.parsed.addresses[0].longitude}
+                        markers={ [
+                            {longitude: result.parsed.addresses[0].longitude, latitude: result.parsed.addresses[0].latitude}
+                            ] }>
 
+                </MapBox>
 
-
-
+            </div>
+        {/if}
     {/if}
     <Accordion>
         <AccordionItem open>
@@ -108,5 +138,4 @@
             </p>
         </AccordionItem>
     </Accordion>
-
 {/if}

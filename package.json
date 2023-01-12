@@ -36,6 +36,7 @@
 		"@appbaseio/searchbase": "^1.8.0",
 		"@elastic/elasticsearch": "^8.5.0",
 		"@elastic/search-ui-elasticsearch-connector": "^1.18.3",
+		"@here/maps-api-for-javascript": "^1.37.0",
 		"html-prettify": "^1.0.7",
 		"jwt-decode": "^3.1.2",
 		"pretty": "^2.0.0"

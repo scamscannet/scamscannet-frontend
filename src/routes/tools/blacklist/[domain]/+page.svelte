@@ -41,6 +41,15 @@
     })
 
 </script>
+
+<svelte:head>
+    <meta name="description" content="The ScamScan blacklist check takes the domain name and creates a scam rating according to the name. This is the first step in our scam detection flow. The blacklist check is the first step towards detecting whether {inputDomain} is a scam."/>
+    <title>Is {inputDomain} a scam?</title>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Is {inputDomain} a scam?"/>
+    <meta name="twitter:description" content="The ScamScan blacklist check takes the domain name and creates a scam rating according to the name."/>
+</svelte:head>
 <Breadcrumb aria-label="Default breadcrumb example" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>

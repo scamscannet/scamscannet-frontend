@@ -1,11 +1,7 @@
 <script>
-    import {Button, Card, Input, Label} from "flowbite-svelte";
-    import LoginComponent from "./authentication/_components/auth/LoginComponent.svelte";
-    import UserView from "./_components/UserView.svelte";
-    import CardView from "./_components/CardView.svelte";
+    import {Card} from "flowbite-svelte";
     import DomainWithSuggestionInput from "./_components/DomainWithSuggestionInput.svelte";
 
-    let domainInput;
 </script>
 
 <div style="height: 560px" class="relative w-full h-96">
