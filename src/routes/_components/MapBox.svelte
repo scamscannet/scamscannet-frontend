@@ -4,7 +4,6 @@
 <script>
     import {onMount} from "svelte";
     import {PUBLIC_HERE_API_KEY} from "$env/static/public";
-    import H from '@here/maps-api-for-javascript';
     export let longitude;
     export let latitude;
 
@@ -32,7 +31,9 @@
         style.addEventListener('change', changeListener);
     }
 
-    onMount(() => {
+    onMount(async () => {
+        let H = (await import('@here/maps-api-for-javascript')).default;
+
         var platform = new H.service.Platform({
             'apikey': PUBLIC_HERE_API_KEY
         });
@@ -44,7 +45,7 @@
             maptypes.vector.normal.map,
             {
                 zoom: 10,
-                center: { lng: longitude, lat: latitude }
+                center: {lng: longitude, lat: latitude}
             });
 
         for (const v of markers) {
@@ -63,6 +64,7 @@
         var ui = H.ui.UI.createDefault(map, defaultLayers);
 
         var bubble;
+
         /**
          * @param {H.mapevents.Event} e The event object
          */
@@ -79,7 +81,7 @@
             let content = '<div style="width:250px">It is a ' + props.kind + ' ' + (props.kind_detail || '') +
                 (props.population ? '<br /> population: ' + props.population : '') +
                 '<br /> local name is ' + props['name'] +
-                (props['name:ar'] ? '<br /> name in Arabic is '+ props['name:ar'] : '') + '</div>';
+                (props['name:ar'] ? '<br /> name in Arabic is ' + props['name:ar'] : '') + '</div>';
 
             // Create a bubble, if not created yet
             if (!bubble) {
