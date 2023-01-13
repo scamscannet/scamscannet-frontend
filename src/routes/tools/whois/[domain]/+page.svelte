@@ -115,13 +115,19 @@
             </div>
         {/each}
     {:else }
-        {#if result.parsed.addresses.length > 1}
+        {#if result.parsed.addresses.length >= 1}
             <div class="w-full my-2">
                 <MapBox latitude={result.parsed.addresses[0].latitude}
                         longitude={result.parsed.addresses[0].longitude}
-                        markers={ [
-                            {longitude: result.parsed.addresses[0].longitude, latitude: result.parsed.addresses[0].latitude}
-                            ] }>
+                        markers={
+                            result.parsed.addresses.map(() => {
+                                return {
+                                    longitude: result.parsed.addresses[0].longitude,
+                                    latitude: result.parsed.addresses[0].latitude
+                                }
+                            })
+                          }
+                >
 
                 </MapBox>
 
