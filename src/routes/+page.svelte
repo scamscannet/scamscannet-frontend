@@ -1,6 +1,7 @@
 <script>
     import {Card} from "flowbite-svelte";
     import DomainWithSuggestionInput from "./_components/DomainWithSuggestionInput.svelte";
+    import CardView from "./_components/CardView.svelte";
 
 </script>
 
@@ -62,18 +63,24 @@
         </svg>
     </div>
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-100 text-center">
-        <h1 class="font-bold text-4xl">ScamScan <br> Make the internet a safer place</h1>
+        <h1 class="font-bold text-4xl">ScamScan <br> Find the fraud before it happens</h1>
     </div>
 </div>
-<h2 class="text-3xl font-bold mt-8 mb-2">Thread Assessment</h2>
+<h2 class="text-3xl font-bold mt-8 mb-2">The ScamScan Scam Check</h2>
 <div class="w-full flex flex-col items-center">
+    <CardView>
+        It can be hard to spot whether a page is a scam or not.
+        Our automated scam check will help you to find out if a you can trust a website.<br>
+        Simply enter the domain and we will provide you with all the informations we have about the website you are looking for.
+
+    </CardView>
     <DomainWithSuggestionInput></DomainWithSuggestionInput>
 </div>
 
-<h2 class="text-3xl font-bold mt-8 mb-2">Tools</h2>
+<h3 class="text-3xl font-bold mt-8 mb-2">Tools</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     <Card href="/tools/whois">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Domain Whois</h5>
+        <h4 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Domain & IP Whois</h4>
         <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
             Lookup domain and ip data through the whois protocol.
         </p>

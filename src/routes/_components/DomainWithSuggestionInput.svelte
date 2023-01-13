@@ -19,12 +19,7 @@
     }
 </script>
 
-<CardView>
-    It can be hard to spot whether a page is a scam or not.
-    Our automated thread assessment will help you to find out if a you can trust a website.<br>
-    Simply enter the domain and we will provide you with all the informations we have about the website you are looking for.
 
-</CardView>
 <div class='w-full flex '>
     <Input class="rounded-r-none" bind:value={domainInput} placeholder="domain.tld" on:input={requestSuggestions}/>
     {#if !domainInput}

@@ -36,7 +36,7 @@
         var platform = new H.service.Platform({
             'apikey': PUBLIC_HERE_API_KEY
         });
-
+        var defaultLayers = platform.createDefaultLayers();
         var maptypes = platform.createDefaultLayers();
 
         var map = new H.Map(
