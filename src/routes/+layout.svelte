@@ -52,10 +52,7 @@
             </div>
             <NavUl {hidden}>
                 <NavLi href="/" active={true}>Home</NavLi>
-                <NavLi href="/about">About</NavLi>
-                <NavLi href="/services">Services</NavLi>
-                <NavLi href="/pricing">Pricing</NavLi>
-                <NavLi href="/contact">Contact</NavLi>
+                <NavLi href="/account">Account</NavLi>
             </NavUl>
         </Navbar>
 

@@ -45,3 +45,7 @@ export const authenticate = async (username: string, password: string) => {
 export const logout = () => {
     userStore.set(null);
 }
+
+export const authToken = () => {
+    return get(userStore);
+}

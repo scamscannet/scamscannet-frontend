@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
     import CardView from "./CardView.svelte";
     import {Button, Input} from "flowbite-svelte";
     import {CLIENTS, makeApiRequest} from "$lib/client/request";
     import {APIS, PATHS} from "$lib/client/apis";
 
-    let domainInput;
+    let domainInput: String;
     let suggestions = [];
     async function requestSuggestions() {
         let response = await makeApiRequest(
@@ -32,7 +32,7 @@
     <div class='w-full w-full mt-2 text-gray-500'>
         <div class="flex flex-col w-full rounded-lg border overflow-hidden">
             {#each suggestions as suggestion, id}
-                <a href="#" class="py-2 px-2 hover:bg-blue-500 hover:text-gray-50" class:bg-gray-200={id % 2}>{suggestion.full_domain}</a>
+                <a href="/insight/{suggestion.full_domain}" class="py-2 px-2 hover:bg-blue-500 hover:text-gray-50" class:bg-gray-200={id % 2}>{suggestion.full_domain}</a>
             {/each}
         </div>
     </div>

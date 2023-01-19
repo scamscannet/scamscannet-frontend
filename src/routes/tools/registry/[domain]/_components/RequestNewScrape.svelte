@@ -16,25 +16,32 @@
             {
                 contentType: CONTENTTYPES.JSON,
                 body: JSON.stringify({url: domain})
-            }
+            },
+            true
         )
-        let jobid = response.content.jobid;
-        const socket = new WebSocket(APIS.registry.replace("https://", "wss://").replace("http://", "ws://") + PATHS.registry.dispatcher.websocket);
-        socket.onopen = (event) => {
-            socket.send(JSON.stringify({
-                method: "subscribe",
-                "jobid": jobid
-            }));
-        }
+        if (response.error){
+            alert("There was an error while requiesting the new scrape");
 
-        socket.addEventListener('message', (event) => {
-            const msg = JSON.parse(event.data);
-            console.log(msg);
-            if (msg.method === "jobUpdate" && msg.jobId === jobid){
-                alert("The scrape has been completed. The website will reload now.")
-                location.reload();
+        } else {
+            let jobid = response.content.jobid;
+            const socket = new WebSocket(APIS.registry.replace("https://", "wss://").replace("http://", "ws://") + PATHS.registry.dispatcher.websocket);
+            socket.onopen = (event) => {
+                socket.send(JSON.stringify({
+                    method: "subscribe",
+                    "jobid": jobid
+                }));
             }
-        });
+
+            socket.addEventListener('message', (event) => {
+                const msg = JSON.parse(event.data);
+                console.log(msg);
+                if (msg.method === "jobUpdate" && msg.jobId === jobid){
+                    alert("The scrape has been completed. The website will reload now.")
+                    location.reload();
+                }
+            });
+
+        }
 
 
     }
