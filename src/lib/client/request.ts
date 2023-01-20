@@ -12,7 +12,7 @@ export const CLIENTS: Method = {
     POST: POST
 }
 
-export const makeApiRequest = async (method: RequestType, api: string, path: string, params: urlParams = {}, payload: object = {}, auth: boolean = true) => {
+export const makeApiRequest = async (method: RequestType, api: string, path: string, params: urlParams = {}, payload: object = {}, auth: boolean = false) => {
     let url: string = api + path
     let parsed_params = urlencodeObject(params)
     if(parsed_params){

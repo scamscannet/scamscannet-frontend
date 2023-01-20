@@ -6,7 +6,7 @@ import {authHeader} from "../helpers/auth_header";
 export const GET: RequestType = {
     execute: getRequest
 }
-async function getRequest  ({url = "", payload = {}, auth = true }): Promise<object> {
+async function getRequest  ({url = "", payload = {}, auth = false }): Promise<object> {
     let headers: Headers;
     if(auth){
         headers = authHeader();

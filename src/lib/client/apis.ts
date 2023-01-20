@@ -24,7 +24,13 @@ export const PATHS = {
         createScrapeJob: "/dispatcher/create-job",
         dispatcher: {
             websocket: "/dispatcher/websocket"
+        },nodes: {
+            register: '/dispatcher/nodes/register',
+            deactivate: '/dispatcher/nodes/deactivate',
+            nodes: '/dispatcher/nodes',
+
         }
+
     },
     whois: {
         whois: "/whois",

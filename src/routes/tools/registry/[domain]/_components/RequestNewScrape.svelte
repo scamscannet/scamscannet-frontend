@@ -1,8 +1,8 @@
 <script>
-    import {CLIENTS, makeApiRequest} from "../../../../../lib/client/request";
-    import {APIS, PATHS} from "../../../../../lib/client/apis";
+    import {CLIENTS, makeApiRequest} from "$lib/client/request";
+    import {APIS, PATHS} from "$lib/client/apis";
     import {Button, Spinner} from "flowbite-svelte";
-    import {CONTENTTYPES} from "../../../../../lib/client/requests/post";
+    import {CONTENTTYPES} from "$lib/client/requests/post";
 
     export let domain;
     let loading = false;

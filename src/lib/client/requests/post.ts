@@ -21,9 +21,7 @@ async function postRequest({
 }): Promise<object> {
     let headers: Headers;
     if(auth){
-        alert("here");
         headers = authHeader();
-        console.log(headers);
     } else {
         headers = new Headers();
     }

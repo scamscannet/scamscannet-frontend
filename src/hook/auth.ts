@@ -4,6 +4,9 @@ import {CLIENTS, makeApiRequest} from "../lib/client/request";
 import {PATHS, APIS} from "../lib/client/apis";
 import type {HTTPError} from "../lib/client/errors";
 import jwt_decode from 'jwt-decode';
+import {redirect} from "@sveltejs/kit";
+import {browser} from "$app/environment";
+import {goto} from "$app/navigation";
 
 export const isUserLoggedIn = () => {
     const storeContent = get(userStore);
@@ -48,4 +51,11 @@ export const logout = () => {
 
 export const authToken = () => {
     return get(userStore);
+}
+
+export const redirectToLoginIfNotAuthenticated = () => {
+    let location = "/authentication/login";
+    if(!isUserLoggedIn()){
+        if (browser) return goto(location);
+        else throw redirect(302, location);    }
 }

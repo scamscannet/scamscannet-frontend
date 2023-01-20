@@ -14,9 +14,18 @@
     import { userStore } from "../store/user";
     import { setContext } from 'svelte';
     import {isUserLoggedIn, logout} from "../hook/auth";
-
     let authenticated = isUserLoggedIn();
     userStore.subscribe(value => authenticated = isUserLoggedIn());
+
+
+    import { page } from '$app/stores';
+    let path;
+
+    function getPath(currentPath) {
+        path = currentPath;
+    }
+
+    $: getPath($page.url.pathname);
 
 </script>
 
@@ -51,8 +60,8 @@
                 <NavHamburger on:click={toggle}/>
             </div>
             <NavUl {hidden}>
-                <NavLi href="/" active={true}>Home</NavLi>
-                <NavLi href="/account">Account</NavLi>
+                <NavLi href="/" active={path === '/'}>Home</NavLi>
+                <NavLi href="/account" active={path.startsWith('/account')}>Account</NavLi>
             </NavUl>
         </Navbar>
 
