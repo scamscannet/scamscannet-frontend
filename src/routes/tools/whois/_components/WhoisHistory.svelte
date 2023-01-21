@@ -34,7 +34,7 @@
             <TableBody class="divide-y">
                 {#each whoisHistory.domain as domain}
                     <TableBodyRow>
-                        <TableBodyCell>{domain}</TableBodyCell>
+                        <TableBodyCell class="w-1/2">{domain}</TableBodyCell>
                         <TableBodyCell><a class="text-blue-500" href="/tools/whois/{domain}">Click here</a> </TableBodyCell>
                     </TableBodyRow>
                 {/each}
@@ -52,8 +52,12 @@
             <TableBody class="divide-y">
                 {#each whoisHistory.ip as ip}
                     <TableBodyRow>
-                        <TableBodyCell>{ip}</TableBodyCell>
-                        <TableBodyCell><a class="text-blue-500" href="/tools/whois/{ip}">Click here</a> </TableBodyCell>
+                        <TableBodyCell class="w-1/2">
+                                {ip}
+                        </TableBodyCell>
+                        <TableBodyCell>
+                            <a class="text-end text-blue-500" href="/tools/whois/{ip}">Click here</a>
+                        </TableBodyCell>
                     </TableBodyRow>
                 {/each}
             </TableBody>
