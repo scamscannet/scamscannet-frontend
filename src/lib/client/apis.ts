@@ -34,6 +34,7 @@ export const PATHS = {
     },
     whois: {
         whois: "/whois",
-        ipWhois: "/ip-whois"
+        ipWhois: "/ip-whois",
+        history: "/history"
     }
 }
