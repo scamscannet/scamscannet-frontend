@@ -22,11 +22,11 @@
     <form on:submit|preventDefault={login} class="">
         <div class='mb-6'>
             <Label for='large-input' class='block mb-2'>Username</Label>
-            <Input bind:value={username} id="large-input" placeholder="Username" />
+            <Input bind:value={username} id="large-input" placeholder="Username" required/>
         </div>
         <div class='mb-6'>
             <Label for='large-input' class='block mb-2'>Password</Label>
-            <Input bind:value={password} id="large-input" placeholder="Password" />
+            <Input type="password" bind:value={password} id="large-input" placeholder="•••••••••" required />
         </div>
         <Button type="submit">Login</Button>
     </form>

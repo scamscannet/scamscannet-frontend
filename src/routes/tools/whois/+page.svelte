@@ -13,7 +13,7 @@
     <BreadcrumbItem href="/tools/whois">Whois</BreadcrumbItem>
 </Breadcrumb>
 <h1 class="text-3xl font-bold mt-4 mb-2">Whois Lookup</h1>
-<DomainInputForm redirectURL="/tools/whois/" placeholder="domain.tld or ip address"></DomainInputForm>
+<DomainInputForm redirectURL="/tools/whois/" placeholder="domain.tld or ip address" ip></DomainInputForm>
 <CardView class="p-2">
     Whois lookups can help you to gather information about domains or ip addresses.
     By looking up an ip address you can get informations like the location or the according ISP.
