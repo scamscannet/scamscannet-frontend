@@ -26,17 +26,7 @@
 
             checkForIpAddress = validateIpAddress(domain)
             if(checkForIpAddress){
-                makeApiRequest(
-                    CLIENTS.GET,
-                    APIS.whois,
-                    PATHS.whois.ipWhois + "/" + domain,
-                    {},
-                    {}
-                ).then(response => {
-                    result = response.content;
-                    console.log(result.parsed);
-                })
-
+                window.location.replace("/tools/ip/" + domain);
             } else {
                 makeApiRequest(
                     CLIENTS.GET,
@@ -67,7 +57,8 @@
 {#if (!result)}
     <LoadingView></LoadingView>
 {:else}
-    {#if !checkForIpAddress && result.parsed.registrar.name}
+
+    {#if result.parsed.registrar.name }
         <div class="grid grid-cols-4 mb-4 gap-4">
             <Card>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Registrar</h5>
@@ -103,7 +94,7 @@
                     </TableHead>
                     <TableBody class="divide-y">
                         {#each Object.entries(contact) as [title, value] }
-                            {#if title && title !== "type" && value}
+                            {#if title && title !== "type" && title !== "location" && value}
                                 <TableBodyRow>
                                     <TableBodyCell>{capitalize(title).replace("-", "")}</TableBodyCell>
                                     <TableBodyCell>{value}</TableBodyCell>
@@ -114,25 +105,6 @@
                 </Table>
             </div>
         {/each}
-    {:else }
-        {#if result.parsed.addresses.length >= 1}
-            <div class="w-full my-2">
-                <MapBox latitude={result.parsed.addresses[0].latitude}
-                        longitude={result.parsed.addresses[0].longitude}
-                        markers={
-                            result.parsed.addresses.map(() => {
-                                return {
-                                    longitude: result.parsed.addresses[0].longitude,
-                                    latitude: result.parsed.addresses[0].latitude
-                                }
-                            })
-                          }
-                >
-
-                </MapBox>
-
-            </div>
-        {/if}
     {/if}
     <Accordion>
         <AccordionItem open>

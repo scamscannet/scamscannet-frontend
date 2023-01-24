@@ -97,4 +97,10 @@
             Access our domain blacklist with all known scam domains we are aware of.
         </p>
     </Card>
+    <Card href="/tools/ip">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">IP</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
+            Search data according to ips such as location, AS, or ip nets.
+        </p>
+    </Card>
 </div>
