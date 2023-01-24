@@ -26,7 +26,7 @@
 
             checkForIpAddress = validateIpAddress(domain)
             if(checkForIpAddress){
-                window.location.replace("/tools/ip/" + domain);
+                window.location.replace("/tools/ip/lookup/" + domain);
             } else {
                 makeApiRequest(
                     CLIENTS.GET,

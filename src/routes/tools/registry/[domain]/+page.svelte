@@ -52,6 +52,13 @@
     }
 
 </script>
+<svelte:head>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={window.location.origin}>
+    <meta property="og:title" content="{$page.params.domain} | ScamScan Domain Registry">
+    <meta property="og:description" content="Explore {$page.params.domain} in a secure environment without putting your own security at risk.">
+    <meta property="og:image" content={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>
+</svelte:head>
 <Breadcrumb aria-label="Default breadcrumb example" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>
