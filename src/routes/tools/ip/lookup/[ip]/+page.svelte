@@ -4,8 +4,8 @@
     import {onMount} from "svelte";
     import {page} from "$app/stores";
     import {validateIpAddress} from "$lib/checks";
-    import {CLIENTS, makeApiRequest} from "$lib/client/request.js";
-    import {APIS, PATHS} from "$lib/client/apis.js";
+    import {CLIENTS, makeApiRequest} from "$lib/client/request";
+    import {APIS, PATHS} from "$lib/client/apis";
     import LoadingView from "../../../../_components/LoadingView.svelte";
     let result = null;
     let ip = null;
