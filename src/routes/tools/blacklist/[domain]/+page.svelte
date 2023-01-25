@@ -126,11 +126,13 @@
 
         </div>
     </CardView>
+    {:else }
+    <CardView>
+        <div class="flex flex-col mx-auto w-full md:w-4/5 xl:w-2/3">
+            <h3 class="text-xl font-bold">About the ScamScan Doman Blacklist</h3>
+            The ScamScan Domain Blacklist contains all known fraudulent domains/websites. In addition, we have trained an AI model based on our data that can predict whether a domain name appears to be fraudulent or not. Unfortunately, the blacklist is limited to subdomains so far. We are already working on an extension. Our blacklist is already successfully used in the Keplr cryptocurrency wallet to protect users from fraud. If you would like to integrate the blacklist, you can contact us at any time.
+        </div>
+    </CardView>
 {/if}
-<CardView>
-    <div class="flex flex-col mx-auto w-full md:w-4/5 xl:w-2/3">
-        <h3 class="text-xl font-bold">About the ScamScan Doman Blacklist</h3>
-        The ScamScan Domain Blacklist contains all known fraudulent domains/websites. In addition, we have trained an AI model based on our data that can predict whether a domain name appears to be fraudulent or not. Unfortunately, the blacklist is limited to subdomains so far. We are already working on an extension. Our blacklist is already successfully used in the Keplr cryptocurrency wallet to protect users from fraud. If you would like to integrate the blacklist, you can contact us at any time.
-    </div>
-</CardView>
+
 
