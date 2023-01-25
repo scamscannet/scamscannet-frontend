@@ -107,7 +107,7 @@
         <div class="flex flex-col mx-auto w-full md:w-4/5 xl:w-2/3">
             <h3 class="text-xl font-bold">FAQ</h3>
             <h4 class="font-bold mt-2">Is {analysis.domain} a scam?</h4>
-            <p>{analysis.domain} is{analysis.isFraud ? '' : "n't"} blacklisted and therefore {analysis.isFraud ? '' : 'not'} a known scam. Based on the domain url our AI is {Math.round(analysis.scamScore * 10000) / 100}% confident about the site being a scam.
+            <p>{analysis.domain} is{analysis.isFraud ? '' : "n't"} blacklisted and therefore {analysis.isFraud ? '' : 'not'} a known scam. Based on the domain name our AI is {Math.round(analysis.scamScore * 10000) / 100}% confident about the site being a scam.
                 If you want to get more insights about this website, please use our full-page AI scoring, as it provides more accurate data due to more data sources.
             </p>
             <div class="border w-2/3 mx-auto my-6"></div>
