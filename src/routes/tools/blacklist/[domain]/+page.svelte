@@ -2,6 +2,7 @@
     import {Input, Button, Spinner, Progressbar, Breadcrumb, BreadcrumbItem} from "flowbite-svelte";
     import {onMount} from "svelte";
     import {page} from "$app/stores";
+    import CardView from "../../../_components/CardView.svelte";
 
     let loading = {
         blacklistCheck: false
@@ -72,7 +73,7 @@
 {:else if analysis.domain}
 
 
-    <div class="flex flex-col items-center border py-6">
+    <div class="flex flex-col items-center border py-6 rounded-lg">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class:text-yellow-400={!analysis.isFraud} class:text-red-500={analysis.isFraud} class="w-36 h-36">
             {#if !analysis.isFraud}
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
@@ -102,5 +103,28 @@
         <Button href={"/tools/registry/" + $page.params.domain} class="mt-6">Get more informations by visiting our {analysis.domain} page report -></Button>
     </div>
 
+    <CardView>
+        <div class="flex flex-col mx-auto w-full md:w-4/5 xl:w-2/3">
+            <h3 class="text-xl font-bold">FAQ</h3>
+            <h4 class="font-bold mt-2">Is {analysis.domain} a scam?</h4>
+            <p>{analysis.domain} is{analysis.isFraud ? '' : "n't"} blacklisted and therefore {analysis.isFraud ? '' : 'not'} a known scam. Based on the domain url our AI is {Math.round(analysis.scamScore * 10000) / 100}% confident about the site being a scam.
+                If you want to get more insights about this website, please use our full-page AI scoring, as it provides more accurate data due to more data sources.
+            </p>
+            <div class="border w-2/3 mx-auto my-6"></div>
+            <p class="font-bold mt-2">What does the scam score mean?</p>
+            <p>We created an AI model which evaluates domain names to detect whether they are scam or not. Therefore, the displayed AI scam rating indicates how sure our AI is whether {analysis.domain} is a scam or not.</p>
+            <div class="border w-2/3 mx-auto my-6"></div>
+            <p class="font-bold mt-2">Why is a page blacklisted and has a low scam score?</p>
+            <p> AI models work with probabilities. Therefore, it may happen that the predictions do not always match reality. Our blacklist is populated by various sources and therefore contains domains that are fraudulent but have not been classified as fraudulent by our domain name AI.</p>
+            <div class="border w-2/3 mx-auto my-6"></div>
+
+            <p class="font-bold mt-2">I want to report a fraudulent domain!</p>
+            <p>We are always happy about reports of fraudulent domains as these are an important source for our blacklist. Please use the form which you can reach via the home page to report scam domains to us! It does not matter if the displayed score is high or low.</p>
+
+
+
+
+        </div>
+    </CardView>
 {/if}
 
