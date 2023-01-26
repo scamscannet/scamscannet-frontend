@@ -74,7 +74,7 @@ import {Button, Card} from "flowbite-svelte";
                 Domain Whois
             </Button>
             <Button>
-                Server IP Whois
+                Website Registry
             </Button>
 
         </div>
@@ -82,3 +82,19 @@ import {Button, Card} from "flowbite-svelte";
     </div>
 
 </CardView>
+<CardView>
+    <div class="flex flex-col mx-auto w-full md:w-4/5 xl:w-2/3">
+        <h3 class="text-xl font-bold">FAQ</h3>
+        <div class="border w-2/3 mx-auto my-6"></div>
+        <p class="font-bold mt-2">What is all of this information telling me?</p>
+        <p>All die Informationen hier helfen sich ein Gesamtbild von {$page.params.domain} zu machen. Wenn du mit dem Maus Cursor über die jeweiligen Felder hoverst wird dir auch genauer erklärt, wie du die Information nutzen kannst.</p>
+        <div class="border w-2/3 mx-auto my-6"></div>
+        <p class="font-bold mt-2">I want to report a fraudulent domain!</p>
+        <p>We are always happy about reports of fraudulent domains as these are an important source for our blacklist. Please use the form which you can reach via the home page to report scam domains to us! It does not matter if the displayed score is high or low.</p>
+
+
+
+
+    </div>
+</CardView>
+
