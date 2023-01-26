@@ -25,7 +25,7 @@
     {#if !domainInput}
         <Button class="w-64 rounded-l-none" disabled>Please enter a domain</Button>
     {:else }
-        <Button class="w-64 rounded-l-none">Check for scam</Button>
+        <Button on:click={() => window.location = "/check/" + domainInput} class="w-64 rounded-l-none">Check for scam</Button>
     {/if}
 </div>
 {#if suggestions.length > 0}
