@@ -5,6 +5,11 @@ import CardView from "../../_components/CardView.svelte";
 import {Button, Card} from "flowbite-svelte";
 import InfoCard from "../_components/InfoCard.svelte";
 </script>
+<svelte:head>
+    <title>{$page.params.domain} Website Report | ScamScan</title>
+    <meta property="description" content="You want to know if you can trust {$page.params.domain}? Then we can help you with your own personal assessment by providing you with different informations concerning {$page.params.domain}!" />
+
+</svelte:head>
 
 <h1 class="font-bold text-2xl">Is {$page.params.domain} a scam?</h1>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-4">
@@ -101,7 +106,7 @@ import InfoCard from "../_components/InfoCard.svelte";
         <p class="font-bold mt-2">I want to report a fraudulent domain!</p>
         <p>We are always happy about reports of fraudulent domains as these are an important source for our blacklist. If you want to report {$page.params.domain} or any other website you can use the form on the home page to report scam domains to us! It does not matter if the displayed scam score is high or low.</p>
         <div class="border w-3/4 mx-auto my-6"></div>
-        <h2 class="font-bold mt-2">Who runs {$page.params.domain}</h2>
+        <h2 class="font-bold mt-2">Who runs {$page.params.domain}?</h2>
         <p>{$page.params.domain} has been registered with REGISTRAR HERE on DATE HERE. If you want to know more about the owner you can have a look at the Whis request for the page. Due to privacy many people redacted the information in their Whois record which makes it very hard to be able to identify the real owner.</p>
 
 
