@@ -3,11 +3,12 @@
 import {page} from "$app/stores";
 import CardView from "../../_components/CardView.svelte";
 import {Button, Card} from "flowbite-svelte";
+import InfoCard from "../_components/InfoCard.svelte";
 </script>
 
 <h1 class="font-bold text-2xl">Is {$page.params.domain} a scam?</h1>
-<div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-4">
-    <div class="sm:col-span-3">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-4">
+    <div class="md:col-span-3">
         <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 mt-4 px-4">
             <div class="">
                 <h3 class="text-xl font-bold">AI Ratings</h3>
@@ -26,14 +27,20 @@ import {Button, Card} from "flowbite-svelte";
     </div>
     <div class="">
         <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 mt-4 px-4">
-            <div class="w-full">
+            <div class="w-full h-full flex flex-col">
                 <h3 class="text-xl font-bold mb-4">Blacklist</h3>
-                <div class="w-full flex justify-center">
+                <div class="w-36 h-36flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-36 h-36 text-yellow-400">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                     </svg>
-
                 </div>
+                <div class="flex justify-center h-full">
+                    <p class="my-auto text-lg font-bold">
+                        Not Blacklisted
+
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -43,21 +50,18 @@ import {Button, Card} from "flowbite-svelte";
     <div class="w-full">
         <h3 class="text-xl font-bold mb-4">Metrics</h3>
         <div class="grid grid-cols-3 gap-4">
-            <Card class="">
-                <p class="text-red-700 text-lg">17.02.2022</p>
-                <p>Domain age</p>
-            </Card>
-            <Card>
-                <p class="text-gray-900 text-lg">Cloudflare</p>
-                <p>Registrar</p>
-            </Card>
-
-            <Card>
-                <p class="text-gray-900 text-lg">Russia</p>
-                <p>Server Location</p>
-
-            </Card>
-
+            <InfoCard color="red">
+                <div class="flex flex-col md:flex-row" slot="value"><span>17.02.2022</span><span class="ml-0 md:ml-0.5">(2 days)</span> </div>
+                <div slot="description">Domain Age</div>
+            </InfoCard>
+            <InfoCard>
+                <div slot="value">Cloudflare</div>
+                <div slot="description">Registrar</div>
+            </InfoCard>
+            <InfoCard>
+                <div slot="value">Russia</div>
+                <div slot="description">Server Location</div>
+            </InfoCard>
         </div>
 
     </div>
@@ -66,7 +70,7 @@ import {Button, Card} from "flowbite-svelte";
 <CardView>
     <div class="w-full">
         <h3 class="text-xl font-bold mb-4">Screenshot</h3>
-        <img class="" src="https://registry.scamscan.net/data/get-image?url=osmosis.cx" alt="{$page.params.domain} screenshot">
+        <img class="mx-auto" src="https://registry.scamscan.net/data/get-image?url=osmosis.cx" alt="{$page.params.domain} screenshot">
     </div>
 </CardView>
 <CardView>
