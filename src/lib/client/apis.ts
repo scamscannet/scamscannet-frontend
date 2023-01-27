@@ -13,10 +13,12 @@ export const PATHS = {
         login: "/user/login"
     },
     blacklist: {
-        lookup: "/lookup",
+        lookup: "/blacklist/lookup",
+        overview: "/overview",
         search: {
             complete: "/search/complete"
         }
+
     },
     registry: {
         get: "/get",
