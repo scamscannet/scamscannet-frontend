@@ -61,6 +61,7 @@
             </div>
             <NavUl {hidden}>
                 <NavLi href="/" active={path === '/'}>Home</NavLi>
+                <NavLi href="/about-us" active={path === '/about-us'}>About Us</NavLi>
                 <NavLi href="/account" active={path.startsWith('/account')}>Account</NavLi>
             </NavUl>
         </Navbar>

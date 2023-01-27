@@ -51,7 +51,7 @@
     <meta name="twitter:title" content="Is {inputDomain} a scam?"/>
     <meta name="twitter:description" content="The ScamScan blacklist check takes the domain name and creates a scam rating according to the name."/>
 </svelte:head>
-<Breadcrumb aria-label="Default breadcrumb example" solid>
+<Breadcrumb aria-label="Breadcrumb" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>
     <BreadcrumbItem href="/tools/blacklist">Blacklist</BreadcrumbItem>

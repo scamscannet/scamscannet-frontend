@@ -1,6 +1,6 @@
 import {CLIENTS, makeApiRequest} from "../../lib/client/request";
 import {APIS, PATHS} from "../../lib/client/apis";
-import {pageData, pageStatus} from "../../store/registry";
+import {pageData, pageStatus} from "../../store/tools/registry";
 
 export const requestPageData = async (domain: string) => {
     pageStatus.set(0);

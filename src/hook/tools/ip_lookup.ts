@@ -1,4 +1,4 @@
-import {ipData, ipStatus} from "../../store/ip";
+import {ipData, ipStatus} from "../../store/tools/ip";
 import {CLIENTS, makeApiRequest} from "../../lib/client/request";
 import {APIS, PATHS} from "../../lib/client/apis";
 

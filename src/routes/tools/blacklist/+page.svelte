@@ -9,7 +9,7 @@
 
     let inputDomain = null;
 </script>
-<Breadcrumb aria-label="Default breadcrumb example" solid>
+<Breadcrumb aria-label="Breadcrumb" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>
     <BreadcrumbItem href="/tools/blacklist">Blacklist</BreadcrumbItem>

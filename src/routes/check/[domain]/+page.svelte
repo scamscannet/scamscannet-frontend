@@ -2,21 +2,22 @@
 
 import {page} from "$app/stores";
 import CardView from "../../_components/CardView.svelte";
-import {Button, Card, Spinner} from "flowbite-svelte";
+import {Breadcrumb, BreadcrumbItem, Button, Card, Spinner} from "flowbite-svelte";
 import InfoCard from "../_components/InfoCard.svelte";
 import {onMount} from "svelte";
 import {requestPageWhoisData} from "../../../hook/tools/whois";
-import {whoisData, whoisStatus} from "../../../store/whois";
-import {blacklistStatus} from "../../../store/blacklist";
+import {whoisData, whoisStatus} from "../../../store/tools/whois";
+import {blacklistStatus} from "../../../store/tools/blacklist";
 import {dateDifferenceToNow, dateDifferenceAsString} from "$lib/converter/date";
 import {requestBlacklistStatus, requestDomainNameScore} from "../../../hook/tools/blacklist";
-import {ipData, ipStatus} from "../../../store/ip";
+import {ipData, ipStatus} from "../../../store/tools/ip";
 import {requestIpData} from "../../../hook/tools/ip_lookup";
 import {requestPageData} from "../../../hook/tools/registry";
-import {pageData} from "../../../store/registry";
+import {pageData} from "../../../store/tools/registry";
 import countryCodeToFlagEmoji from "country-code-to-flag-emoji";
 import * as iso from "iso-3166-1";
-import {domainScamScore, pageScamScore} from "../../../store/blacklist";
+import {domainScamScore, pageScamScore} from "../../../store/tools/blacklist";
+import DomainWithSuggestionInput from "../../_components/DomainWithSuggestionInput.svelte";
 
 let ip = null;
 onMount(async () => {
@@ -39,10 +40,21 @@ onMount(async () => {
     <meta property="description" content="You want to know if you can trust {$page.params.domain}? Then we can help you with your own personal assessment by providing you with different informations concerning {$page.params.domain}!" />
 </svelte:head>
 
-<h1 class="font-bold text-2xl">Is {$page.params.domain} a scam?</h1>
+<Breadcrumb aria-label="Breadcrumb" solid>
+    <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
+    <BreadcrumbItem href="/check">Scam Check</BreadcrumbItem>
+    <BreadcrumbItem href="/check/{$page.params.domain}">{$page.params.domain.toUpperCase()}</BreadcrumbItem>
+</Breadcrumb>
+
+<div class="flex flex-col lg:flex-row justify-between py-4">
+    <h1 class="font-bold text-2xl w-full lg:w-1/4 my-auto ">Is {$page.params.domain} a scam?</h1>
+    <div class=" w-full z-20 w-full lg:w-3/4 mt-4 lg:mt-0">
+        <DomainWithSuggestionInput></DomainWithSuggestionInput>
+    </div>
+</div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-4">
     <div class="md:col-span-3">
-        <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 mt-4 px-4">
+        <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 px-4">
             <div class="">
                 <h3 class="text-xl font-bold">AI Ratings</h3>
                 <p>We developed AIs to automatically analyse gathered information to determine whether a domain is scam or not. These scores are useful in addition to the overall picture but you shouldn't base your whole judgment on these two scores.</p>

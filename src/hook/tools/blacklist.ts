@@ -1,6 +1,6 @@
 import {CLIENTS, makeApiRequest} from "../../lib/client/request";
 import {APIS, PATHS} from "../../lib/client/apis";
-import {blacklistStatus, domainScamScore, pageScamScore} from "../../store/blacklist";
+import {blacklistStatus, domainScamScore, pageScamScore} from "../../store/tools/blacklist";
 
 export const requestBlacklistStatus = async (domain: String) => {
     const response = await makeApiRequest(

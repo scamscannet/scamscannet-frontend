@@ -1,4 +1,4 @@
-import {whoisData, whoisStatus} from "../../store/whois";
+import {whoisData, whoisStatus} from "../../store/tools/whois";
 import {CLIENTS, makeApiRequest} from "../../lib/client/request";
 import {APIS, PATHS} from "../../lib/client/apis";
 
