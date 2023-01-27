@@ -66,14 +66,20 @@ onMount(async () => {
                 <div class="w-full bg-gray-200 rounded-full">
                     <div class="bg-blue-600 text-xs font-medium text-blue-50 text-center p-2 leading-none rounded-full"
                          style="width: {Math.round($domainScamScore * 10000) / 100}%"
-                    class:bg-red-700={$domainScamScore > 0.75}> {Math.round($domainScamScore * 10000) / 100}%</div>
+                         class:bg-red-700={$domainScamScore > 0.75}
+                         class:bg-green-400={$domainScamScore < 0.5}
+                         class:bg-yellow-400={0.75 >= $domainScamScore >= 0.5}
+
+                    > {Math.round($domainScamScore * 10000) / 100}%
+
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="">
-        <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 mt-4 px-4">
+        <div class="flex justify-center rounded-lg border border-lg w-full h-full py-4 px-4">
             <div class="w-full h-full flex flex-col">
                 <h3 class="text-xl font-bold mb-4">Blacklist</h3>
                 <div class="w-full h-36 flex flex-col items-center">
