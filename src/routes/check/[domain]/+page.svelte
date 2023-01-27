@@ -18,14 +18,14 @@ import countryCodeToFlagEmoji from "country-code-to-flag-emoji";
 import * as iso from "iso-3166-1";
 import {domainScamScore, pageScamScore} from "../../../store/blacklist";
 
-
+let ip = null;
 onMount(async () => {
     await requestPageWhoisData($page.params.domain);
     await requestBlacklistStatus($page.params.domain);
     await requestDomainNameScore($page.params.domain)
     await requestPageData($page.params.domain);
     try {
-        const ip = $pageData.server.ip;
+        ip = $pageData.server.ip;
         await requestIpData(ip);
 
     } catch (e){
@@ -52,7 +52,9 @@ onMount(async () => {
                 </div>
                 <h3 class="mt-2 font-bold">Domain Name</h3>
                 <div class="w-full bg-gray-200 rounded-full">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: {Math.round($domainScamScore * 10000) / 100}%"> {Math.round($domainScamScore * 10000) / 100}%</div>
+                    <div class="bg-blue-600 text-xs font-medium text-blue-50 text-center p-2 leading-none rounded-full"
+                         style="width: {Math.round($domainScamScore * 10000) / 100}%"
+                    class:bg-red-700={$domainScamScore > 0.75}> {Math.round($domainScamScore * 10000) / 100}%</div>
                 </div>
 
             </div>
@@ -171,13 +173,13 @@ onMount(async () => {
     <div class="w-full">
         <h3 class="text-xl font-bold mb-4">More Informations</h3>
         <div class="grid grid-cols-3 gap-4">
-            <Button>
+            <Button href="/tools/whois/{$page.params.domain}">
                 Domain Whois
             </Button>
-            <Button>
-                Domain Whois
+            <Button href="/tools/whois/{ip}" disabled={ip === null}>
+                IP Whois
             </Button>
-            <Button>
+            <Button href="/tools/registry/{$page.params.domain}">
                 Website Registry
             </Button>
 
