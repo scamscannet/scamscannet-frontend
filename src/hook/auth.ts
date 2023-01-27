@@ -3,10 +3,19 @@ import {get} from "svelte/store";
 import {CLIENTS, makeApiRequest} from "../lib/client/request";
 import {PATHS, APIS} from "../lib/client/apis";
 import type {HTTPError} from "../lib/client/errors";
-import jwt_decode from 'jwt-decode';
 import {redirect} from "@sveltejs/kit";
 import {browser} from "$app/environment";
 import {goto} from "$app/navigation";
+import {parseJwt} from "../lib/jwt";
+
+
+
+function jwtTokenExpired(){
+    const { exp } = parseJwt(refreshToken);
+    if (Date.now() >= exp * 1000) {
+        return false;
+    }
+}
 
 export const isUserLoggedIn = () => {
     const storeContent = get(userStore);
@@ -14,9 +23,14 @@ export const isUserLoggedIn = () => {
         return false;
     }
     try {
-        const content = jwt_decode(storeContent);
-        // TODO: check for expiry
-        return true
+        const { exp } = parseJwt(storeContent);
+        let valid = Date.now() < exp * 1000
+        if(!valid){
+            logout()
+        }
+        return valid;
+
+
     } catch (e) {
         logout()
         return false
