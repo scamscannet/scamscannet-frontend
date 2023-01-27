@@ -17,11 +17,12 @@ export const PATHS = {
         overview: "/overview",
         search: {
             complete: "/search/complete"
-        }
+        },
+        score: "/score"
 
     },
     registry: {
-        get: "/get",
+        get: "/data/get",
         screenshot: "/get-image",
         createScrapeJob: "/dispatcher/create-job",
         dispatcher: {

@@ -11,5 +11,5 @@ export const blacklistStatus = writable(0);
 
 
 
-export const domainScamScore = writable(-1);
-export const pageScamScore = writable(-1);
+export const domainScamScore = writable(0);
+export const pageScamScore = writable(0);

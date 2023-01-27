@@ -15,8 +15,27 @@ export const requestBlacklistStatus = async (domain: String) => {
     if (response.error) {
         blacklistStatus.set(-1);
     } else  {
-        console.log(response.content.status);
         blacklistStatus.set(response.content.status === "blacklist" ? 1 : response.content.status === "whitelist" ? 2 : 3);
+    }
+
+
+}
+
+export const requestDomainNameScore = async (domain: string) => {
+    domainScamScore.set(0);
+    const response = await makeApiRequest(
+        CLIENTS.GET,
+        APIS.blacklist,
+        PATHS.blacklist.score,
+        {domain},
+        {},
+        false
+    )
+
+    if (response.error) {
+        domainScamScore.set(-1);
+    } else  {
+        domainScamScore.set(response.content.score);
     }
 
 

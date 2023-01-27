@@ -9,12 +9,28 @@ import {requestPageWhoisData} from "../../../hook/tools/whois";
 import {whoisData, whoisStatus} from "../../../store/whois";
 import {blacklistStatus} from "../../../store/blacklist";
 import {dateDifferenceToNow, dateDifferenceAsString} from "$lib/converter/date";
-import {requestBlacklistStatus} from "../../../hook/tools/blacklist";
+import {requestBlacklistStatus, requestDomainNameScore} from "../../../hook/tools/blacklist";
+import {ipData, ipStatus} from "../../../store/ip";
+import {requestIpData} from "../../../hook/tools/ip_lookup";
+import {requestPageData} from "../../../hook/tools/registry";
+import {pageData} from "../../../store/registry";
+import countryCodeToFlagEmoji from "country-code-to-flag-emoji";
+import * as iso from "iso-3166-1";
+import {domainScamScore, pageScamScore} from "../../../store/blacklist";
 
 
 onMount(async () => {
     await requestPageWhoisData($page.params.domain);
     await requestBlacklistStatus($page.params.domain);
+    await requestDomainNameScore($page.params.domain)
+    await requestPageData($page.params.domain);
+    try {
+        const ip = $pageData.server.ip;
+        await requestIpData(ip);
+
+    } catch (e){
+        console.log("Error while parsing IP")
+    }
 
 })
 </script>
@@ -32,11 +48,11 @@ onMount(async () => {
                 <p>We developed AIs to automatically analyse gathered information to determine whether a domain is scam or not. These scores are useful in addition to the overall picture but you shouldn't base your whole judgment on these two scores.</p>
                 <h3 class="mt-4 font-bold">Web Page Analysis</h3>
                 <div class="w-full bg-gray-200 rounded-full">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 25%"> 25%</div>
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 25%"> Not yet implemented</div>
                 </div>
                 <h3 class="mt-2 font-bold">Domain Name</h3>
                 <div class="w-full bg-gray-200 rounded-full">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 25%"> 25%</div>
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: {Math.round($domainScamScore * 10000) / 100}%"> {Math.round($domainScamScore * 10000) / 100}%</div>
                 </div>
 
             </div>
@@ -125,11 +141,19 @@ onMount(async () => {
                     {:else }
                         {$whoisData.parsed.registrar.name}
                     {/if}
-                        </div>
+                </div>
                 <div slot="description">Registrar</div>
             </InfoCard>
             <InfoCard>
-                <div slot="value">Russia</div>
+                <div slot="value">
+                    {#if $ipStatus === 0}
+                        <Spinner></Spinner>
+                    {:else if ($ipStatus !== 2)}
+                        <span>No Data available</span>
+                    {:else }
+                        {countryCodeToFlagEmoji(iso.whereAlpha3($ipData.parsed.addresses[0].country).alpha2)} {iso.whereAlpha3($ipData.parsed.addresses[0].country).country}
+                    {/if}
+                </div>
                 <div slot="description">Server Location</div>
             </InfoCard>
         </div>
@@ -173,10 +197,6 @@ onMount(async () => {
         <div class="border w-3/4 mx-auto my-6"></div>
         <h2 class="font-bold mt-2">Who runs {$page.params.domain}?</h2>
         <p>{$page.params.domain} has been registered with REGISTRAR HERE on DATE HERE. If you want to know more about the owner you can have a look at the Whpis request for the page. Due to privacy reasons many people redact the information in their Whois record which makes it very hard to be able to identify the real owner.</p>
-
-
-
-
     </div>
 </CardView>
 
