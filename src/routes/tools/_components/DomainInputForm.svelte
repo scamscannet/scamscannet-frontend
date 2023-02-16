@@ -9,7 +9,7 @@
     function handleInput(){
         // Simulate a mouse click:
         if (inputDomain){
-            window.location.href =  redirectURL + inputDomain.toLowerCase();
+            window.location.href =  redirectURL + inputDomain.toLowerCase().trim();
         }
     }
 

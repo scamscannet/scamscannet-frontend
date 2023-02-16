@@ -1,7 +1,30 @@
 <script>
-    import {Card} from "flowbite-svelte";
+    import {Alert, Button, Card, Input, Label} from "flowbite-svelte";
     import DomainWithSuggestionInput from "./_components/DomainWithSuggestionInput.svelte";
     import CardView from "./_components/CardView.svelte";
+    import {CLIENTS, makeApiRequest} from "$lib/client/request";
+    import {APIS, PATHS} from "$lib/client/apis";
+    import {is_domain} from "$lib/checks";
+
+    let reportDomainInput;
+    let status;
+    async function reportPage(){
+        let response = await makeApiRequest(
+            CLIENTS.POST,
+            APIS.blacklist,
+            PATHS.blacklist.report.new + reportDomainInput,
+            {},
+            {}
+        )
+        let data = response.content;
+        if('status' in data && data.status === 'success'){
+            status = 'success';
+            reportDomainInput = '';
+        } else {
+            status = 'error';
+        }
+
+    }
 
 </script>
 
@@ -104,3 +127,21 @@
         </p>
     </Card>
 </div>
+<h3 class="text-3xl font-bold mt-8 mb-2">Report Website</h3>
+{#if status === 'success'}
+    <Alert dismissable color="green" >Your report was successful and will be reviewed by us as soon as possible.</Alert>
+{:else if status !== undefined}
+    <Alert dismissable color="yellow" >Something went wrong. Please contact us if this error keeps appearing.</Alert>
+
+{/if}
+<form>
+    <div class='mb-6'>
+        <Label for='default-input' class='block mb-2'></Label>
+        <Input bind:value={reportDomainInput} id='default-input' placeholder="domain.tld" />
+    </div>
+    {#if is_domain(reportDomainInput)}
+        <Button on:click={reportPage}>Report</Button>
+    {:else }
+        <Button on:click={reportPage} disabled>Please enter a valid domain</Button>
+    {/if}
+</form>

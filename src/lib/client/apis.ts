@@ -18,7 +18,10 @@ export const PATHS = {
         search: {
             complete: "/search/complete"
         },
-        score: "/score"
+        score: "/score",
+        report: {
+            new: "/report/"
+        }
 
     },
     registry: {
