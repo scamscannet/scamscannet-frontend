@@ -19,6 +19,7 @@ export const PATHS = {
             complete: "/search/complete"
         },
         score: "/score",
+        website_score: "/score_website",
         report: {
             new: "/report/"
         }

@@ -11,7 +11,7 @@ import {parseJwt} from "../lib/jwt";
 
 
 function jwtTokenExpired(){
-    const { exp } = parseJwt(refreshToken);
+    const { exp } = parseJwt("refreshToken");
     if (Date.now() >= exp * 1000) {
         return false;
     }

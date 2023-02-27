@@ -40,3 +40,23 @@ export const requestDomainNameScore = async (domain: string) => {
 
 
 }
+
+export const requestWebsiteScore = async (domain: string) => {
+    pageScamScore.set(0);
+    const response = await makeApiRequest(
+        CLIENTS.GET,
+        APIS.blacklist,
+        PATHS.blacklist.website_score,
+        {domain},
+        {},
+        false
+    )
+
+    if (response.error) {
+        pageScamScore.set(-1);
+    } else  {
+        pageScamScore.set(response.content.score);
+    }
+
+
+}

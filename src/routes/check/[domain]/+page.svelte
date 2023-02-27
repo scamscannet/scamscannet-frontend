@@ -9,7 +9,7 @@ import {requestPageWhoisData} from "../../../hook/tools/whois";
 import {whoisData, whoisStatus} from "../../../store/tools/whois";
 import {blacklistStatus} from "../../../store/tools/blacklist";
 import {dateDifferenceToNow, dateDifferenceAsString} from "$lib/converter/date";
-import {requestBlacklistStatus, requestDomainNameScore} from "../../../hook/tools/blacklist";
+import {requestBlacklistStatus, requestDomainNameScore, requestWebsiteScore} from "../../../hook/tools/blacklist";
 import {ipData, ipStatus} from "../../../store/tools/ip";
 import {requestIpData} from "../../../hook/tools/ip_lookup";
 import {requestPageData} from "../../../hook/tools/registry";
@@ -18,6 +18,7 @@ import countryCodeToFlagEmoji from "country-code-to-flag-emoji";
 import * as iso from "iso-3166-1";
 import {domainScamScore, pageScamScore} from "../../../store/tools/blacklist";
 import DomainWithSuggestionInput from "../../_components/DomainWithSuggestionInput.svelte";
+import LoadingView from "../../_components/LoadingView.svelte";
 
 let ip = null;
 onMount(async () => {
@@ -25,6 +26,8 @@ onMount(async () => {
     await requestBlacklistStatus($page.params.domain);
     await requestDomainNameScore($page.params.domain)
     await requestPageData($page.params.domain);
+    await requestWebsiteScore($page.params.domain);
+
     try {
         ip = $pageData.server.ip;
         await requestIpData(ip);
@@ -58,22 +61,35 @@ onMount(async () => {
             <div class="">
                 <h3 class="text-xl font-bold">AI Ratings</h3>
                 <p>We developed AIs to automatically analyse gathered information to determine whether a domain is scam or not. These scores are useful in addition to the overall picture but you shouldn't base your whole judgment on these two scores.</p>
-                <h3 class="mt-4 font-bold">Web Page Analysis</h3>
-                <div class="w-full bg-gray-200 rounded-full">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 25%"> Not yet implemented</div>
-                </div>
-                <h3 class="mt-2 font-bold">Domain Name</h3>
-                <div class="w-full bg-gray-200 rounded-full">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-50 text-center p-2 leading-none rounded-full"
-                         style="width: {Math.round($domainScamScore * 10000) / 100}%"
-                         class:bg-red-700={$domainScamScore > 0.75}
-                         class:bg-green-400={$domainScamScore < 0.5}
-                         class:bg-yellow-400={0.75 >= $domainScamScore >= 0.5}
+                {#if $pageScamScore !== 0 && $domainScamScore != 0}
+                    <h3 class="mt-4 font-bold">Web Page Analysis</h3>
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: {Math.round($pageScamScore * 10000) / 100}%"
 
-                    > {Math.round($domainScamScore * 10000) / 100}%
+                             class:bg-red-700={$pageScamScore > 0.75}
+                             class:bg-green-400={$pageScamScore < 0.5}
+                             class:bg-yellow-400={0.75 >= $pageScamScore >= 0.5}
 
+                        > {Math.round($pageScamScore * 10000) / 100}%
+                        </div>
                     </div>
-                </div>
+                    <h3 class="mt-2 font-bold">Domain Name</h3>
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="bg-blue-600 text-xs font-medium text-blue-50 text-center p-2 leading-none rounded-full"
+                             style="width: {Math.round($domainScamScore * 10000) / 100}%"
+                             class:bg-red-700={$domainScamScore > 0.75}
+                             class:bg-green-400={$domainScamScore < 0.5}
+                             class:bg-yellow-400={0.75 >= $domainScamScore >= 0.5}
+
+                        > {Math.round($domainScamScore * 10000) / 100}%
+
+                        </div>
+                    </div>
+                    {:else }
+                    <div class="flex justify-center h-36 w-full items-center">
+                        <Spinner></Spinner>
+                    </div>
+                    {/if}
 
             </div>
         </div>
