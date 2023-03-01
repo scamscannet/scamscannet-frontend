@@ -50,7 +50,7 @@
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 A report for {$page.params.domain.toLowerCase()} has been created and is now awaiting review.
             </p>
-            <Button color="alternative"
+            <Button on:click={() => {window.location.replace("/check/" + $page.params.domain.toLowerCase())}} color="alternative"
             >Website report<svg
                     class="ml-2 w-3 h-3"
                     fill="currentColor"
