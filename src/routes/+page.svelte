@@ -126,6 +126,12 @@
             Search data according to ips such as location, AS, or ip nets.
         </p>
     </Card>
+    <Card href="/tools/takedown">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Takedown Tracker</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
+            Track our progress in taking down websites after we identified them as fraud.
+        </p>
+    </Card>
 </div>
 <h3 class="text-3xl font-bold mt-8 mb-2">Report Website</h3>
 {#if status === 'success'}
