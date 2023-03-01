@@ -51,7 +51,7 @@
                 A report for {$page.params.domain.toLowerCase()} has been created and is now awaiting review.
             </p>
             <Button on:click={() => {window.location.replace("/check/" + $page.params.domain.toLowerCase())}} color="alternative"
-            >Website report<svg
+            >Website Data<svg
                     class="ml-2 w-3 h-3"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -63,7 +63,7 @@
             ></Button>
         </TimelineItem>
         {#if $reportStatus === 3}
-        <TimelineItem title="Report verified" date="ScamScan">
+        <TimelineItem title="Report approved" date="ScamScan">
             <p class="text-base font-normal text-gray-500 dark:text-gray-400">
                 The report has been reviewed and the website is a confirmed scam. We are now gathering the evidence to make the report.
             </p>
@@ -79,7 +79,7 @@
         {#if $abuseStatus > 1}
             <TimelineItem title="Abuse report created" date="ScamScan -> Registrar">
                 <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-                    A abuse report has been opened with the hosting provider.
+                    The provider/registrar has been informed about the fraudulent domain and is now reviewing the case.
                 </p>
             </TimelineItem>
         {/if}

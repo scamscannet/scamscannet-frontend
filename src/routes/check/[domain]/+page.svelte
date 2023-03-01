@@ -285,8 +285,7 @@
                 low.</p>
             <div class="border w-3/4 mx-auto my-6"></div>
             <h2 class="font-bold mt-2">Who runs {$page.params.domain}?</h2>
-            <p>{$page.params.domain} has been registered with REGISTRAR HERE on DATE HERE. If you want to know more
-                about the owner you can have a look at the Whpis request for the page. Due to privacy reasons many
+            <p>If you want to know more about the owner you can have a look at the Whois request for the page. Due to privacy reasons many
                 people redact the information in their Whois record which makes it very hard to be able to identify the
                 real owner.</p>
         </div>
