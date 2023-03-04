@@ -2,15 +2,24 @@
     import { authenticate, isUserLoggedIn, logout } from "../../../../hook/auth.ts";
     import { userStore} from "../../../../store/user.ts";
     import {Button, Input, Label} from "flowbite-svelte";
+    import {page} from "$app/stores";
+    import {goto} from "$app/navigation";
 
     let username = null;
     let password = null;
     let error = null;
+    let urlSearchParams = new URLSearchParams($page.url.search);
+    const destination = urlSearchParams.source === undefined ? "/" : "/" + urlSearchParams.source;
 
     let authenticated = isUserLoggedIn();
     userStore.subscribe(value => authenticated = isUserLoggedIn())
     async function login(){
-        authenticate(username, password);
+        let loggedIn = await authenticate(username, password);
+        console.log(loggedIn);
+        if(loggedIn){
+            await goto(destination);
+
+        }
     }
 </script>
 {#if !authenticated}

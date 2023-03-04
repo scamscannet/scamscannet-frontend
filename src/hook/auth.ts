@@ -2,11 +2,11 @@ import {userStore} from "../store/user";
 import {get} from "svelte/store";
 import {CLIENTS, makeApiRequest} from "../lib/client/request";
 import {PATHS, APIS} from "../lib/client/apis";
-import type {HTTPError} from "../lib/client/errors";
 import {redirect} from "@sveltejs/kit";
 import {browser} from "$app/environment";
 import {goto} from "$app/navigation";
 import {parseJwt} from "../lib/jwt";
+import {page} from "$app/stores";
 
 
 
@@ -39,7 +39,8 @@ export const isUserLoggedIn = () => {
 
 export const authenticate = async (username: string, password: string) => {
     let body_string = `username=${username}&password=${password}`
-    makeApiRequest(
+    let success = false;
+    await makeApiRequest(
         CLIENTS.POST,
         APIS.authentication,
         PATHS.authentication.login,
@@ -54,9 +55,11 @@ export const authenticate = async (username: string, password: string) => {
             alert(response.content.detail)
         } else {
             userStore.set(response.content.access_token)
+            success = true;
         }
     })
     .catch(error => console.log(error))
+    return success
 }
 
 export const logout = () => {

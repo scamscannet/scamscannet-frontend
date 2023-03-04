@@ -31,8 +31,8 @@
     onMount(async () => {
         await requestPageWhoisData($page.params.domain);
         await requestBlacklistStatus($page.params.domain);
-        await requestDomainNameScore($page.params.domain);
         await requestPageData($page.params.domain);
+        await requestDomainNameScore($page.params.domain);
 
         // Check if website has been scraped yet
         if (Object.entries($pageData).length !== 0 && $pageData.constructor === Object) {
@@ -41,6 +41,8 @@
 
             if (!offline) {
                 await requestWebsiteScore($page.params.domain);
+                await requestDomainNameScore($page.params.domain);
+
                 try {
                     ip = $pageData.server.ip;
                     await requestIpData(ip);
@@ -220,7 +222,7 @@
                         {#if $whoisStatus === 0}
                             <Spinner></Spinner>
                         {:else if ($whoisStatus !== 2)}
-                            <span>No Date available</span>
+                            <span>No Data available</span>
                         {:else }
                             {$whoisData.parsed.registrar.name}
                         {/if}

@@ -55,7 +55,7 @@
                 {#if (authenticated)}
                     <Button on:click={logout} size="sm">Logout</Button>
                 {:else }
-                    <Button on:click={() => {window.location = "/authentication/login"} } size="sm">Login</Button>
+                    <Button on:click={() => {window.location = "/authentication/login?source=" + $page.url.pathname.substring(1)} } size="sm">Login</Button>
                 {/if}
                 <NavHamburger on:click={toggle}/>
             </div>

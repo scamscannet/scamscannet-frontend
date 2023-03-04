@@ -7,7 +7,6 @@
     import {onMount} from "svelte";
     import LoadingView from "../../../_components/LoadingView.svelte";
     onMount(async () => {
-
         await requestReportData($page.params.domain)
         if ($reportStatus > 2){
             console.log("Request data for potential takedown/abuse request")
