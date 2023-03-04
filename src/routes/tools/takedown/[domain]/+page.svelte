@@ -6,6 +6,10 @@
     import {requestAbuseData, requestReportData} from "../../../../hook/tools/report";
     import {onMount} from "svelte";
     import LoadingView from "../../../_components/LoadingView.svelte";
+    import {isAdmin} from "../../../../hook/auth";
+    import {CLIENTS, makeApiRequest} from "$lib/client/request";
+    import {APIS, PATHS} from "$lib/client/apis";
+    import {CONTENTTYPES} from "$lib/client/requests/post";
     onMount(async () => {
         await requestReportData($page.params.domain)
         if ($reportStatus > 2){
@@ -13,6 +17,24 @@
             await requestAbuseData($page.params.domain)
         }
     })
+
+    async function completeReport(scam){
+        const response = await makeApiRequest(
+            CLIENTS.POST,
+            APIS.blacklist,
+            PATHS.blacklist.report.process,
+            {},
+            {
+                contentType: CONTENTTYPES.JSON,
+                body: JSON.stringify({
+                    "domain": $page.params.domain,
+                    "scam": scam,
+                })
+            },
+            true
+        )
+        //location.reload();
+    }
 </script>
 <svelte:head>
     <meta name="description" content="The ScamScan blacklist check takes the domain name and creates a scam rating according to the name. This is the first step in our scam detection flow. The blacklist check is the first step towards detecting whether {$page.params.domain} is a scam."/>
@@ -96,5 +118,21 @@
         </TimelineItem>
         {/if}
     </Timeline>
+</CardView>
+{/if}
+
+{#if isAdmin()}
+<CardView>
+    <div class="flex flex-col w-full">
+        <p class="text-2xl font-bold text-center">Admin Panel</p>
+
+        {#if $reportStatus === 2}
+            <div class="flex justify-around w-full">
+                <Button on:click={() => {completeReport(true)}} color="red">Scam</Button>
+                <Button on:click={() => {completeReport(false)}} color="green">No Scam</Button>
+            </div>
+        {/if}
+
+    </div>
 </CardView>
 {/if}

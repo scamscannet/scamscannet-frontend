@@ -76,3 +76,13 @@ export const redirectToLoginIfNotAuthenticated = () => {
         if (browser) return goto(location);
         else throw redirect(302, location);    }
 }
+
+export const isAdmin = () => {
+    const storeContent = get(userStore);
+    if (storeContent === null){
+        return false;
+    }
+    const {roles} = parseJwt(storeContent);
+    return roles.includes("ROLE_ADMIN");
+
+}

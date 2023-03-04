@@ -12,7 +12,7 @@
         let response = await makeApiRequest(
             CLIENTS.POST,
             APIS.blacklist,
-            PATHS.blacklist.report.new + reportDomainInput,
+            PATHS.blacklist.report.new + "/" + reportDomainInput,
             {},
             {}
         )

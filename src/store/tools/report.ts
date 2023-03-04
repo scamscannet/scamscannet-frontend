@@ -1,7 +1,7 @@
 import {writable} from "svelte/store";
 
 export const reportData = writable({});
-
+export const reportsList = writable(undefined);
 /*
  * Status for the Whois Request
  * -1 - Error

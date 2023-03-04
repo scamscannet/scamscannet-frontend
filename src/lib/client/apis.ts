@@ -21,8 +21,10 @@ export const PATHS = {
         score: "/score",
         website_score: "/score_website",
         report: {
-            new: "/report/",
-            lookup: "/report"
+            new: "/report/create",
+            lookup: "/report/lookup",
+            all: "/report",
+            process: "/report/complete"
         },
         abuse: {
             lookup: "/abuse/lookup"
