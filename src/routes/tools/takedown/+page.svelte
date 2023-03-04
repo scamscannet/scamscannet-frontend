@@ -14,7 +14,7 @@
 <Breadcrumb aria-label="Breadcrumb" solid>
     <BreadcrumbItem href="/" home>Home</BreadcrumbItem>
     <BreadcrumbItem href="/tools">Tools</BreadcrumbItem>
-    <BreadcrumbItem href="/tools/takedown">Registry</BreadcrumbItem>
+    <BreadcrumbItem href="/tools/takedown">Takedown</BreadcrumbItem>
 </Breadcrumb>
 <h1 class="text-3xl font-bold mt-4 mb-2">ScamScan Domain Takedown</h1>
 <CardView>

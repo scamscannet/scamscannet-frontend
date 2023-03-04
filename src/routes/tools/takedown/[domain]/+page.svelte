@@ -33,7 +33,7 @@
             },
             true
         )
-        //location.reload();
+        location.reload();
     }
 </script>
 <svelte:head>
