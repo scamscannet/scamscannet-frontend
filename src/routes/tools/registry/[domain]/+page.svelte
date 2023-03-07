@@ -87,7 +87,20 @@
                         </div>
                     </div>
                 </CardView>
-                    <p></p>
+            <UserView>
+                <CardView slot="content">
+                    <div class="">
+                        <p>The requested page has not yet been scraped. You can request a new scrape by pressing the button below.</p>
+                        <div class="flex justify-center w-full mt-3">
+                            <RequestNewScrape class="" domain={$page.params.domain} ></RequestNewScrape>
+                        </div>
+                    </div>
+                </CardView>
+                <div slot="errorNotice">
+                    <p>You can't request a new scrape. Only authenticated users can request to scrape a page.</p>
+                </div>
+            </UserView>
+
         {:else }
         <div class="w-full flex justify-center rounded overflow-hidden mt-4 ">
             <img class=" w-4/5" src={"https://registry.scamscan.net/data/get-image?url=" + $page.params.domain}>

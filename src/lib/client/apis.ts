@@ -17,7 +17,7 @@ export const PATHS = {
         overview: "/overview",
         search: {
             complete: "/search/complete",
-            historical: "/search/historical"
+            historical: "/search/new-domains"
         },
         score: "/score",
         website_score: "/score_website",

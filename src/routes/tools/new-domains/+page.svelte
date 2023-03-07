@@ -16,7 +16,6 @@
     import {historicalRequestStatus, historicalResults} from "../../../store/tools/historical";
 
     let inputDomain;
-    let days;
     let exactMatch = true;
     console
     async function search(event){
