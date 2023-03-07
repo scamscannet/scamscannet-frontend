@@ -11,7 +11,7 @@
             CLIENTS.GET,
             APIS.blacklist,
             PATHS.blacklist.search.complete,
-            {'query': domainInput},
+            {'query': domainInput.toLowerCase()},
             {}
         )
         suggestions = response.content.suggestions;

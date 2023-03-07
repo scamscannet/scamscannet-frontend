@@ -121,9 +121,9 @@
         </p>
     </Card>
     <Card href="/tools/ip">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">IP</h5>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">New Domains</h5>
         <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">
-            Search data according to ips such as location, AS, or ip nets.
+            Search through newly registered domains.
         </p>
     </Card>
     <Card href="/tools/takedown">

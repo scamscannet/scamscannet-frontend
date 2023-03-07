@@ -1,5 +1,5 @@
 export type urlParams = {
-    [key: string]: string
+    [key: string]: any
 }
 
 export const urlencodeObject = (data: urlParams ): string | null => {

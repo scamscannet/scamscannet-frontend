@@ -16,7 +16,8 @@ export const PATHS = {
         lookup: "/blacklist/lookup",
         overview: "/overview",
         search: {
-            complete: "/search/complete"
+            complete: "/search/complete",
+            historical: "/search/historical"
         },
         score: "/score",
         website_score: "/score_website",
