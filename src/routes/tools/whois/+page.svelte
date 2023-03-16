@@ -2,7 +2,6 @@
     import {Breadcrumb, BreadcrumbItem } from "flowbite-svelte";
     import DomainInputForm from "../_components/DomainInputForm.svelte";
     import CardView from "../../_components/CardView.svelte";
-    import WhoisHistory from "./_components/WhoisHistory.svelte";
 
 
 
@@ -23,5 +22,3 @@
     Due to privacy laws the whois data for domains varies a lot between the different TLDs. Especially European domains are very restrictive about the data they show.
     Therefore you won't be able to gather much informations about domains like .de.
 </CardView>
-
-<WhoisHistory></WhoisHistory>
