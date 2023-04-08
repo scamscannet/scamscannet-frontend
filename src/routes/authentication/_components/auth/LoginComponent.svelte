@@ -10,12 +10,11 @@
     let error = null;
     let urlSearchParams = new URLSearchParams($page.url.search);
     const destination = urlSearchParams.source === undefined ? "/" : "/" + urlSearchParams.source;
-
+    console.log(destination)
     let authenticated = isUserLoggedIn();
     userStore.subscribe(value => authenticated = isUserLoggedIn())
     async function login(){
         let loggedIn = await authenticate(username, password);
-        console.log(loggedIn);
         if(loggedIn){
             await goto(destination);
 

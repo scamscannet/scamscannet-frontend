@@ -29,10 +29,11 @@
     let scraped = undefined;
     let offline = false;
     onMount(async () => {
-        await requestPageWhoisData($page.params.domain);
-        await requestBlacklistStatus($page.params.domain);
-        await requestPageData($page.params.domain);
-        await requestDomainNameScore($page.params.domain);
+        let lowercaseDomain = $page.params.domain.toLowerCase();
+        await requestPageWhoisData(lowercaseDomain);
+        await requestBlacklistStatus(lowercaseDomain);
+        await requestPageData(lowercaseDomain);
+        await requestDomainNameScore(lowercaseDomain);
 
         // Check if website has been scraped yet
         if (Object.entries($pageData).length !== 0 && $pageData.constructor === Object) {
@@ -40,8 +41,8 @@
             offline = $pageData.offline;
 
             if (!offline) {
-                await requestWebsiteScore($page.params.domain);
-                await requestDomainNameScore($page.params.domain);
+                await requestDomainNameScore(lowercaseDomain);
+                await requestWebsiteScore(lowercaseDomain);
 
                 try {
                     ip = $pageData.server.ip;
